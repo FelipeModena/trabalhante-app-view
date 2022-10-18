@@ -1,0 +1,24 @@
+@font-face {
+  font-family: 'Noto Sans Mono', monospace;
+  src: url('/fonts/NotoSansMono-VariableFont_wdth.ttf');
+}
+
+:root {
+  --primary: #007396 !important;; 
+  --secondary: #f3d54e;
+  --tertiary: #e6f1f5;
+  --quaternary: #b3d5e0;
+  --quinary: #66abc0;
+  --senary: #f3d54e;
+  --dark-primary: #00232d;
+  --dark-secondary: #e6e9ea;
+  --dark-tertiary: #b3bdc0;
+  --dark-quaternary: #667b81;
+  font-size: 14px;
+
+  font-family: 'Noto Sans Mono', monospace !important;
+}
+
+.bg-primary{
+  background-color: var(--primary) !important;
+}
