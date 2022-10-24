@@ -13,9 +13,10 @@ export default Vue.extend({
   name: 'IndexPage',
   computed: {
     companyModuleConnection: () => getModule(CompanyModule, store),
-    companies(): [CompanyState] {
+    companies(): CompanyState[] {
       return this.companyModuleConnection.companies
     },
   },
+
 })
 </script>

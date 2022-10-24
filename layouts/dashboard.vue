@@ -1,16 +1,9 @@
 <template>
   <div>
     <NavBar :user-name="user.userName" />
-    <SideBar />
-    <b-container>
-      <b-row>
-        <b-col cols="12" lg="12">
+    <SideBar :user-name="user.userName" />
 
-          <nuxt />
-          <BoardNews />
-        </b-col>
-      </b-row>
-    </b-container>
+    <nuxt />
   </div>
 </template>
 
@@ -24,11 +17,10 @@ import CompanyModule from '~/store/company'
 import { CompanyState } from '~/store/types/company'
 import UserModule from '~/store/user'
 import { UserState } from '~/store/types/user'
-import BoardNews from '~/components/dashboard/business/BoardNews.vue'
 
 export default Vue.extend({
   name: 'DashboardIndexPage',
-  components: { SideBar, NavBar, BoardNews },
+  components: { SideBar, NavBar },
   layout: 'dashboard',
   computed: {
     companyModuleConnection: () => getModule(CompanyModule, store),
@@ -36,9 +28,12 @@ export default Vue.extend({
     user(): UserState {
       return this.userModuleConnection.user
     },
-    companies(): [CompanyState] {
+    companies(): CompanyState[] {
       return this.companyModuleConnection.companies
     },
+  },
+  mounted() {
+    this.companyModuleConnection.getBaseCompany()
   },
   methods: {
     changeUserName() {
@@ -48,3 +43,9 @@ export default Vue.extend({
   },
 })
 </script>
+
+<style lang="scss">
+body {
+  background-color: rgb(249, 244, 244);
+}
+</style>

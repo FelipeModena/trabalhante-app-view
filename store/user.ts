@@ -3,6 +3,7 @@ import { UserState } from './types/user'
 
 @Module({ namespaced: true, name: 'userModule' })
 export default class UserModule extends VuexModule {
+  selectedUser: UserState = {} as UserState
   user: UserState = {
     userName: 'Felipe Modena',
     isActive: true,
@@ -14,12 +15,15 @@ export default class UserModule extends VuexModule {
     last_name: '',
     avatar: '',
     roles: [],
-    permissions: [],
+    permissions: ['user', 'admin', 'company-owner'],
     created_at: '',
     updated_at: '',
     deleted_at: '',
     sessionTime: 0,
   }
+
+  token: any =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbGlwZS5rcm9pdG9yQGdtYWlsLmNvbSIsInRva2VuIjoiMzEyM2QxMmUzMTIzIiwibmFtZSI6IkZlbGlwZSBLcm9pdG9yIENhcmEgTW9kZW5hIiwiaWQiOjF9.81LoYmtdH5wxYW1XRxmdy8IqGiSsgTfcY-EuRhzEacceyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbGlwZS5rcm9pdG9yQGdtYWlsLmNvbSIsInRva2VuIjoiMzEyM2QxMmUzMTIzIiwibmFtZSI6IkZlbGlwZSBLcm9pdG9yIENhcmEgTW9kZW5hIiwiaWQiOjF9.81LoYmtdH5wxYW1XRxmdy8IqGiSsgTfcY-EuRhzEacc'
 
   @Mutation
   updateUserName(newUserName: string) {

@@ -4,7 +4,7 @@
 }
 
 :root {
-  --primary: #007396 !important;; 
+  --primary: #007396 !important;
   --secondary: #f3d54e;
   --tertiary: #e6f1f5;
   --quaternary: #b3d5e0;
@@ -19,6 +19,13 @@
   font-family: 'Noto Sans Mono', monospace !important;
 }
 
-.bg-primary{
+.bg-primary {
   background-color: var(--primary) !important;
+}
+
+body {
+  a {
+    color: inherit; /* blue colors for links too */
+    text-decoration: inherit; /* no underline */
+  }
 }

@@ -1,11 +1,128 @@
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators'
 import { CompanyState } from './types/company'
+import { ComplainState } from './types/complain'
 @Module({ namespaced: true, name: 'companyModule' })
 export default class CompanyModule extends VuexModule {
-  readonly companies: [CompanyState] = [
+  selectedCompany: CompanyState = {} as CompanyState
+  companies: CompanyState[] = [
     {
       id: '1',
-      companyName: 'Company 1',
+      companyName: 'Kroitor Software Dev House',
+      newReviews: 0,
+      mensalSearches: 21,
+      jobOpportunities: [
+        {
+          id: '1',
+          name: 'Desenvolvedor pleno Assembly',
+          status: true,
+          description:
+            'Sample generic cover letter. It is always advisable to personalize your general cover letter for the target job opportunity. However, there are  situations when it is appropriate to use a general cover letter. These are usually instances where you are not submitting your resume in response to a job posting or to a specific employer.      You can use a general cover letter when you go to a job fair and you are giving your resume and cover letter to a number of potential employers for different jobs.      ',
+          link: 'generic-cover-letter',
+        },
+        {
+          id: '2',
+          name: 'Desenvolvedor junior Vue',
+          status: true,
+          description:
+            'Sample generic cover letter. It is always advisable to personalize your general cover letter for the target job opportunity. However, there are  situations when it is appropriate to use a general cover letter. These are usually instances where you are not submitting your resume in response to a job posting or to a specific employer.      You can use a general cover letter when you go to a job fair and you are giving your resume and cover letter to a number of potential employers for different jobs.      ',
+          link: 'generic-cover-letter',
+        },
+      ],
+      periods: [
+        {
+          id: '1',
+          period: 6,
+          averageGrade: 9.8,
+          publicEvaluationsReplyTotal: 1425,
+          publicEvaluationsTotal: 1564,
+        },
+        {
+          id: '2',
+          period: 12,
+          averageGrade: 6.8,
+          publicEvaluationsReplyTotal: 3621,
+          publicEvaluationsTotal: 3821,
+        },
+        {
+          id: '3',
+          period: 16,
+          averageGrade: 3.8,
+          publicEvaluationsReplyTotal: 7345,
+          publicEvaluationsTotal: 8745,
+        },
+      ],
+    },
+    {
+      id: '2',
+      companyName: 'Startup Generica de Puff',
+      newReviews: 0,
+      mensalSearches: 124,
+      jobOpportunities: [
+        {
+          id: '1',
+          name: 'Desenvolvedor pleno Assembly',
+          status: true,
+          description:
+            'Sample generic cover letter. It is always advisable to personalize your general cover letter for the target job opportunity. However, there are  situations when it is appropriate to use a general cover letter. These are usually instances where you are not submitting your resume in response to a job posting or to a specific employer.      You can use a general cover letter when you go to a job fair and you are giving your resume and cover letter to a number of potential employers for different jobs.      ',
+          link: 'generic-cover-letter',
+        },
+        {
+          id: '2',
+          name: 'Desenvolvedor junior Vue',
+          status: true,
+          description:
+            'Sample generic cover letter. It is always advisable to personalize your general cover letter for the target job opportunity. However, there are  situations when it is appropriate to use a general cover letter. These are usually instances where you are not submitting your resume in response to a job posting or to a specific employer.      You can use a general cover letter when you go to a job fair and you are giving your resume and cover letter to a number of potential employers for different jobs.      ',
+          link: 'generic-cover-letter',
+        },
+      ],
+      periods: [
+        {
+          id: '1',
+          period: 6,
+          averageGrade: 9.8,
+          publicEvaluationsReplyTotal: 1425,
+          publicEvaluationsTotal: 1564,
+        },
+        {
+          id: '2',
+          period: 12,
+          averageGrade: 6.8,
+          publicEvaluationsReplyTotal: 3621,
+          publicEvaluationsTotal: 3821,
+        },
+        {
+          id: '3',
+          period: 16,
+          averageGrade: 3.8,
+          publicEvaluationsReplyTotal: 7345,
+          publicEvaluationsTotal: 8745,
+        },
+      ],
+    },
+  ]
+
+  complains: ComplainState[] = [
+    {
+      id: '1',
+      companyId: '1',
+      title: 'Complain 1',
+      description: 'Complain 1 description',
+      status: 'open',
+      userStatus: 3,
+      createdAt: '2020-01-01',
+      updatedAt: '2020-01-01',
+      categories: [{ id: '1', name: 'Category 1' }],
+    },
+    {
+      id: '2',
+      companyId: '1',
+      title: 'Complain 2',
+      description: 'Complain 2 description',
+      status: 'open',
+      userStatus: 1,
+      createdAt: '2020-01-01',
+      updatedAt: '2020-01-01',
+      categories: [{ id: '1', name: 'Category 1' }],
     },
   ]
 
@@ -27,5 +144,30 @@ export default class CompanyModule extends VuexModule {
   @Action
   updateCompanyAction(id: string) {
     this.updateCompanyMutation(id)
+  }
+
+  @Action
+  changeCompany(id: string) {
+    this.changeCompanyMutation(id)
+    if (process.client) {
+      localStorage.setItem('companySelected', id)
+    }
+  }
+
+  @Action
+  getBaseCompany() {
+    if (process.client) {
+      const companySelected = localStorage.getItem('companySelected')
+      if (companySelected) {
+        this.changeCompanyMutation(companySelected)
+      }
+    }
+  }
+
+  @Mutation
+  changeCompanyMutation(id: string) {
+    const company = this.companies.find((company) => company.id === id)!
+
+    this.selectedCompany = company
   }
 }
