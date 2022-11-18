@@ -1,16 +1,19 @@
 <template>
   <b-card>
-    <span>{{ rate }}</span>
-    <p v-if="userStatus === 1">Funcionário atual</p>
-    <p v-else-if="userStatus === 2">Ex-funcionário</p>
-    <p v-else>Não é mais funcionário</p>
+    <p>
+      <strong v-if="userStatus === 1">Funcionário atual</strong>
+      <strong v-else-if="userStatus === 2">Ex-funcionário</strong>
+      <strong v-else>Não é mais funcionário</strong>
+    </p>
+    <p>Nota: {{ rate }}</p>
+
     <h4>{{ title }}</h4>
     <p>{{ content }}</p>
     <template #footer>
       <b-container>
         <b-row>
           <b-col>
-            <b-btn>Util</b-btn>
+            <b-btn variant="success"><b-icon-hand-thumbs-up /> Util</b-btn>
             <b-btn>Compartilhar</b-btn>
           </b-col>
           <b-col>
@@ -41,7 +44,7 @@ export default Vue.extend({
     },
     rate: {
       type: Number,
-      default: 4,
+      default: 4.3,
     },
     userStatus: {
       type: Number,

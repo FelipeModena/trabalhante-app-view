@@ -6,7 +6,7 @@
 import { getModule } from 'nuxt-property-decorator'
 import Vue from 'vue'
 import CompanyModule from '~/store/company'
-import store from '~/store/main'
+import { store } from '~/store/main'
 import { CompanyState } from '~/store/types/company'
 
 export default Vue.extend({

@@ -2,13 +2,12 @@
   <b-container>
     <b-row>
       <b-col>
-        {{ cities }}
         <h2>Muito bem! estamos quase acabando!</h2>
         <p>
           Agora nos falta apenas pegarmos algumas informações para facilitar a
           sua busca
         </p>
-        <b-card>
+        <b-card class="mb-5">
           <b-form>
             <b-form-group label="Seu nome" label-for="register-">
               <b-form-input
@@ -30,8 +29,13 @@
             </b-form-group>
           </b-form>
 
-          <NewCompanyUser v-if="jobModel === 1" />
-          <NewNormalUser v-if="jobModel === 2" />
+          <NewCompanyUser
+            v-if="jobModel === 1"
+            :cities="cities"
+            :user-id="userId"
+            :userName="name"
+          />
+          <NewNormalUser v-if="jobModel === 2" :cities="cities" />
         </b-card>
       </b-col>
     </b-row>
@@ -40,28 +44,32 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import cities from '~/static/data/geo/brazil.json'
+
 import NewCompanyUser from '~/components/register/NewCompanyUser.vue'
 import NewNormalUser from '~/components/register/NewNormalUser.vue'
+import citiesJson from '~/static/data/geo/brazil-cities-states.json'
 export default Vue.extend({
   name: 'RegisterFormsPage',
   components: { NewCompanyUser, NewNormalUser },
-  asyncData({ params }) {
-    return { cities }
-  },
   data() {
     return {
-      jobModel: 0,
+      cities: citiesJson.states,
+      jobModel: 1,
+      userId: '',
       options: [
         { value: 1, text: 'Contratar' },
         { value: 2, text: 'Ser contratado' },
       ],
-      name: '',
-      password: '',
+      name: 'Felipe',
     }
   },
-  mounted() {
-    console.log(cities)
+  created() {
+    const id = this.$router.currentRoute.query.id
+    if (!id) {
+      this.$router.push({
+        path: '/login/register',
+      })
+    } else this.userId = id.toString()
   },
   methods: {
     formatter(value: string) {

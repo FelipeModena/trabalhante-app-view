@@ -9,7 +9,7 @@ export default class UserModule extends VuexModule {
     isActive: true,
     messages: [],
     notifications: [],
-    id: 0,
+    id: '0',
     email: '',
     first_name: '',
     last_name: '',
@@ -31,12 +31,13 @@ export default class UserModule extends VuexModule {
   }
 
   @Mutation
-  deleteUserName(newUserName: string) {
-    this.user.userName = newUserName + 'null'
+  createNewUserMutation(user: UserState) {
+    this.user = user
   }
 
   @Action
-  clearUser() {
-    this.context.commit('deleteUserName', 'User removed')
+  createNewUserAction(user: UserState) {
+    const newUser = { ...user }
+    this.createNewUserMutation(newUser)
   }
 }

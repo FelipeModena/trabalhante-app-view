@@ -12,11 +12,11 @@ import { getModule, Vue } from 'nuxt-property-decorator'
 import SideBar from '~/components/dashboard/layout/SideBar.vue'
 import NavBar from '~/components/dashboard/layout/NavBar.vue'
 
-import store from '~/store/main'
 import CompanyModule from '~/store/company'
 import { CompanyState } from '~/store/types/company'
 import UserModule from '~/store/user'
 import { UserState } from '~/store/types/user'
+import { store } from '~/store/main'
 
 export default Vue.extend({
   name: 'DashboardIndexPage',

@@ -4,7 +4,7 @@ import ComplainModule from './complain'
 import UserModule from './user'
 
 // eslint-disable-next-line import/no-named-as-default-member
-const store =  new Vuex.Store({
+export const store =  new Vuex.Store({
   state: () => ({}),
   mutations: {},
   actions: {},
@@ -14,4 +14,4 @@ const store =  new Vuex.Store({
     complainModule: ComplainModule,
   },
 })
-export default store
+//  default store

@@ -67,9 +67,10 @@ export default Vue.extend({
   },
   methods: {
     registerRoute() {
+      const randomId = Math.floor(Math.random() * 1000).toString()
       this.$router.push({
         path: '/login/register/register-forms',
-        query: { email: this.email, password: this.password },
+        query: { id: randomId },
       })
     },
     formatter(value: string) {

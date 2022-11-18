@@ -54,7 +54,7 @@
     <b-container id="dashboard-nav-bar-redirector">
       <b-row class="mx-auto">
         <b-col lg="12">
-          <b-nav  align="center">
+          <b-nav align="center">
             <b-nav-item to="/dashboard">Início</b-nav-item>
             <b-nav-item to="/dashboard/jobs">Vagas</b-nav-item>
             <b-nav-item to="/dashboard/interview" disabled
@@ -75,7 +75,7 @@
 import { getModule } from 'nuxt-property-decorator'
 import Vue from 'vue'
 import CompanyModule from '~/store/company'
-import store from '~/store/main'
+import { store } from '~/store/main'
 import { CompanyState } from '~/store/types/company'
 export default Vue.extend({
   name: 'NavBar',

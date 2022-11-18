@@ -2,15 +2,28 @@
   <b-container>
     <b-row>
       <b-col>
-        <h4>
-          Vagas disponíveis pela <strong>{{ company.companyName }}</strong>
-        </h4>
-        {{ company }}
+        <b-card
+          v-for="(jobOpportunity, index) in companiesJobOpportunities"
+          :key="index"
+          class="my-4"
+        >
+          <p><strong>Nome:</strong> {{ jobOpportunity.name }}</p>
+          <p>
+            <strong>Status:</strong>
+            <span class="text-success">{{
+              jobOpportunity.status === true ? 'Ativa' : 'Inativa'
+            }}</span>
+          </p>
+          <p>
+            <strong>Descrição:</strong>
+            {{ jobOpportunity.description }}
+          </p>
+        </b-card>
       </b-col>
     </b-row>
     <b-row>
       <b-col>
-        <ColapseCommon />
+        <!-- <ColapseCommon /> -->
       </b-col>
     </b-row>
   </b-container>
@@ -21,16 +34,16 @@ import { getModule } from 'nuxt-property-decorator'
 import Vue from 'vue'
 import ColapseCommon from '../../../components/common/ColapseCommon.vue'
 import CompanyModule from '~/store/company'
-import store from '~/store/main'
-import { CompanyState } from '~/store/types/company'
+import { CompanyState, JobOpportunityState } from '~/store/types/company'
+import { store } from '~/store/main'
 export default Vue.extend({
   name: 'JobsPage',
   components: { ColapseCommon },
   layout: 'dashboard',
   computed: {
     companyModuleConnection: () => getModule(CompanyModule, store),
-    companiesJobOpportunities(): any {
-      return this.companyModuleConnection.selectedCompany.jobOpportunities
+    companiesJobOpportunities(): JobOpportunityState[] {
+      return this.companyModuleConnection.selectedCompany.jobOpportunities ?? []
     },
     company(): CompanyState {
       return this.companyModuleConnection.selectedCompany

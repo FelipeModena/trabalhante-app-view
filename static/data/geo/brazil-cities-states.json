@@ -1,11 +1,11 @@
-export{
+{
   "states": [
     {
       "uf": "AC",
       "name": "Acre",
       "cities": [
         "Acrelândia",
-        "Assis Brasil",
+        "Ansis Brasil",
         "Brasiléia",
         "Bujari",
         "Capixaba",
