@@ -33,7 +33,7 @@
             v-if="jobModel === 1"
             :cities="cities"
             :user-id="userId"
-            :userName="name"
+            :user-name="name"
           />
           <NewNormalUser v-if="jobModel === 2" :cities="cities" />
         </b-card>

@@ -23,7 +23,7 @@
     </b-row>
     <b-row>
       <b-col>
-        <!-- <ColapseCommon /> -->
+        <CollapseCommon   />
       </b-col>
     </b-row>
   </b-container>
@@ -32,13 +32,13 @@
 <script lang="ts">
 import { getModule } from 'nuxt-property-decorator'
 import Vue from 'vue'
-import ColapseCommon from '../../../components/common/ColapseCommon.vue'
+import CollapseCommon from '../../../components/common/CollapseCommon.vue'
 import CompanyModule from '~/store/company'
 import { CompanyState, JobOpportunityState } from '~/store/types/company'
 import { store } from '~/store/main'
 export default Vue.extend({
   name: 'JobsPage',
-  components: { ColapseCommon },
+  components: { CollapseCommon },
   layout: 'dashboard',
   computed: {
     companyModuleConnection: () => getModule(CompanyModule, store),

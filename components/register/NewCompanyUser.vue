@@ -29,7 +29,7 @@
       <b-form-group
         label="Setores de atuação"
         label-for="register-uf"
-        description="Exemplo: shopping, atendimento ao cliente, industria de tecidos, etc"
+        description="Exemplo: shopping, atendimento ao cliente, indústria de tecidos, etc"
       >
         <b-form-tags v-model="companyRoles" input-id="tags-basic"></b-form-tags>
       </b-form-group>
@@ -102,7 +102,7 @@ export default Vue.extend({
       companyRoles: [
         'shopping',
         'atendimento ao cliente',
-        'industria de tecidos',
+        'indústria de tecidos',
       ],
       companyDescription: '',
       companyEmail: '',

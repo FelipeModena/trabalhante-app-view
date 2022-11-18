@@ -3,7 +3,7 @@ import { Base } from './common/Base'
 export interface PeriodCompanyEvaluationState {
   id?: string
   period?: number
-  averageGrade?: number
+  averageGrade: number
   publicEvaluationsTotal?: number
   publicEvaluationsReplyTotal?: number
 }

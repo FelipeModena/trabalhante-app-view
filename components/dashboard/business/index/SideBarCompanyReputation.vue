@@ -2,15 +2,14 @@
   <b-card header-tag="header" header="Reputação">
     <b-tabs>
       <b-tab
-        v-for="(companyPeridod, index) in companiesPeriod"
+        v-for="(companyPeriod, index) in companiesPeriod"
         :key="index"
-        :title="companyPeridod.period + ' meses'"
+        :title="companyPeriod.period + ' meses'"
       >
         <b-container class="pt-2">
           <b-row
             v-if="
-              companyPeridod.averageGrade > 7 &&
-              companyPeridod.averageGrade <= 10
+              companyPeriod.averageGrade > 7 && companyPeriod.averageGrade <= 10
             "
           >
             <b-col>
@@ -24,8 +23,7 @@
 
           <b-row
             v-if="
-              companyPeridod.averageGrade < 7 &&
-              companyPeridod.averageGrade >= 5
+              companyPeriod.averageGrade < 7 && companyPeriod.averageGrade >= 5
             "
           >
             <b-col> <b-icon-emoji-neutral variant="" font-scale="4" /></b-col>
@@ -33,7 +31,7 @@
               <h5>Bom</h5>
             </b-col>
           </b-row>
-          <b-row v-if="companyPeridod.averageGrade < 5">
+          <b-row v-if="companyPeriod.averageGrade < 5">
             <b-col>
               <b-icon-emoji-angry variant="danger" font-scale="4"
             /></b-col>
@@ -49,7 +47,7 @@
                   ><span>Reclamações <br /></span>
                   <span
                     ><b-icon-megaphone />
-                    {{ companyPeridod.publicEvaluationsTotal }}</span
+                    {{ companyPeriod.publicEvaluationsTotal }}</span
                   ></b-card
                 ></b-col
               >
@@ -58,7 +56,7 @@
                   <span>Respondidas <br /></span>
                   <span
                     ><b-icon-reply-all-fill />
-                    {{ companyPeridod.publicEvaluationsReplyTotal }}</span
+                    {{ companyPeriod.publicEvaluationsReplyTotal }}</span
                   ></b-card
                 >
               </b-col>
@@ -76,6 +74,13 @@ import Vue from 'vue'
 import CompanyModule from '~/store/company'
 import { store } from '~/store/main'
 import { PeriodCompanyEvaluationState } from '~/store/types/company'
+
+declare module 'vue/types/vue' {
+  interface Vue {
+    companyModuleConnection: () => any
+    companiesPeriod: () => any
+  }
+}
 export default Vue.extend({
   computed: {
     companyModuleConnection: () => getModule(CompanyModule, store),
