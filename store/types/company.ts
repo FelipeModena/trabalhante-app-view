@@ -14,6 +14,7 @@ export interface JobOpportunityState {
   link?: string
   date?: string
   status?: boolean
+  clicks?: number
 }
 export interface CompanyStatusState {
   mensalSearches?: number

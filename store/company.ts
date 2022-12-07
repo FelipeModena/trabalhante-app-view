@@ -68,6 +68,7 @@ export default class CompanyModule extends VuexModule {
           description:
             'Sample generic cover letter. It is always advisable to personalize your general cover letter for the target job opportunity. However, there are  situations when it is appropriate to use a general cover letter. These are usually instances where you are not submitting your resume in response to a job posting or to a specific employer.      You can use a general cover letter when you go to a job fair and you are giving your resume and cover letter to a number of potential employers for different jobs.      ',
           link: 'generic-cover-letter',
+          clicks:34
         },
         {
           id: '2',
@@ -156,9 +157,9 @@ export default class CompanyModule extends VuexModule {
 
   @Action
   addNewCompanyAction(company: CompanyState): number {
-    const objecToSave = { ...company }
+    const objectToSave = { ...company }
 
-    this.addNewCompanyMutation(objecToSave)
+    this.addNewCompanyMutation(objectToSave)
     return 1
   }
 
