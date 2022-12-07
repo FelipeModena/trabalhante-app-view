@@ -1,29 +1,29 @@
 <template>
   <b-container>
     <b-row>
-      <b-col>
-        <b-card
-          v-for="(jobOpportunity, index) in companiesJobOpportunities"
-          :key="index"
-          class="my-4"
+      <b-col
+        v-for="(jobOpportunity, index) in companiesJobOpportunities"
+        :key="index"
+        cols="12"
+      >
+        <CollapseCommon :id="jobOpportunity.id" :title="jobOpportunity.name" class="my-4">
+          <template slot="content">
+            <b-card >
+              {{jobOpportunity}}
+              <p><strong>Nome:</strong> {{ jobOpportunity.name }}</p>
+              <p>
+                <strong>Status:</strong>
+                <span class="text-success">{{
+                  jobOpportunity.status === true ? 'Ativa' : 'Inativa'
+                }}</span>
+              </p>
+              <p>
+                <strong>Descrição:</strong>
+                {{ jobOpportunity.description }}
+              </p>
+            </b-card>
+          </template></CollapseCommon
         >
-          <p><strong>Nome:</strong> {{ jobOpportunity.name }}</p>
-          <p>
-            <strong>Status:</strong>
-            <span class="text-success">{{
-              jobOpportunity.status === true ? 'Ativa' : 'Inativa'
-            }}</span>
-          </p>
-          <p>
-            <strong>Descrição:</strong>
-            {{ jobOpportunity.description }}
-          </p>
-        </b-card>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col>
-        <CollapseCommon   />
       </b-col>
     </b-row>
   </b-container>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="primary" class="mb-4">
+    <b-navbar toggleable="lg" type="dark" variant="primary" class="mb-3">
       <b-navbar-toggle target="nav-collapse" />
       <b-navbar-brand href="#">
         <b-img
@@ -54,7 +54,7 @@
     <b-container id="dashboard-nav-bar-redirector">
       <b-row class="mx-auto">
         <b-col lg="12">
-          <b-nav align="center">
+          <b-nav id="nav-bar-routes-container" align="center">
             <b-nav-item to="/dashboard">Início</b-nav-item>
             <b-nav-item to="/dashboard/jobs">Vagas</b-nav-item>
             <b-nav-item to="/dashboard/interview" disabled
@@ -108,5 +108,11 @@ export default Vue.extend({
 #dashboard-nav-bar-redirector {
   margin-top: -15px;
   margin-bottom: 15px;
+}
+
+#nav-bar-routes-container {
+  box-shadow: -1px 9px 12px -10px rgba(0, 0, 0, 0.75);
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
 }
 </style>
