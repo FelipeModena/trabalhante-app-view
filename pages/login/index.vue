@@ -11,9 +11,8 @@
                 <b-form-group label="Email" label-for="login-email">
                   <b-form-input
                     id="login-email"
-                    v-model="email"
+                    v-model="formsLogin.email"
                     required
-                    type="email"
                     placeholder="email@mail.com"
                     :formatter="formatter"
                     autofocus
@@ -22,7 +21,7 @@
                 <b-form-group label="Senha" label-for="login-password">
                   <b-form-input
                     id="login-password"
-                    v-model="password"
+                    v-model="formsLogin.password"
                     required
                     type="password"
                     :formatter="formatter"
@@ -64,14 +63,18 @@ export default Vue.extend({
   name: 'LoginPage',
   data() {
     return {
-      email: '',
-      password: '',
+      formsLogin: {
+        email: '',
+        password: '',
+      },
     }
   },
   methods: {
     onSubmit(event: Event) {
       event.preventDefault()
-      alert(JSON.stringify({}))
+
+      // validate form and login, then redirect to dashboard home
+      this.$router.push('/dashboard')
     },
     formatter(value: string) {
       return value.toLowerCase()

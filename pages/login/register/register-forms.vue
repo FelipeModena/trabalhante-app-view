@@ -44,7 +44,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-
 import NewCompanyUser from '~/components/register/NewCompanyUser.vue'
 import NewNormalUser from '~/components/register/NewNormalUser.vue'
 import citiesJson from '~/static/data/geo/brazil-cities-states.json'
@@ -63,6 +62,7 @@ export default Vue.extend({
       name: 'Felipe',
     }
   },
+
   created() {
     const id = this.$router.currentRoute.query.id
     if (!id) {

@@ -1,43 +1,41 @@
 <template>
   <b-container class="mt-5">
     <b-row class="pt-5">
-      <b-col lg="8" class="px-5 text-center">
+      <b-col lg="7" class="px-5 text-center">
         <b-img class="mx-auto my-3" src="/logo-text.png" fluid />
         <h2>
           Uma nova forma de encontrar pessoas e ambientes de trabalho
           compatíveis ao seu modelo!
         </h2>
       </b-col>
-      <b-col>
+      <b-col class="my-auto">
         <b-card align="center">
           <b-row class="text-left">
             <b-col>
-              <b-form>
+              <b-form @submit="onSubmit">
                 <b-form-group label="Email" label-for="login-email">
                   <b-form-input
                     id="login-email"
-                    v-model="email"
+                    v-model="formsRegister.email"
                     placeholder="email@mail.com"
                     :formatter="formatter"
                     autofocus
+                    required
                   ></b-form-input>
                 </b-form-group>
                 <b-form-group label="Senha" label-for="login-password">
                   <b-form-input
                     id="login-password"
-                    v-model="password"
+                    v-model="formsRegister.password"
                     type="password"
+                    required
                     :formatter="formatter"
                   ></b-form-input>
                 </b-form-group>
+                <b-button class="w-100" variant="primary" type="submit"
+                  >Criar nova conta</b-button
+                >
               </b-form>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col>
-              <b-button class="w-100" variant="primary" @click="registerRoute()"
-                >Criar nova conta</b-button
-              >
             </b-col>
           </b-row>
           <b-row class="mt-3">
@@ -56,16 +54,30 @@
 </template>
 
 <script lang="ts">
+import { getModule } from 'nuxt-property-decorator'
 import Vue from 'vue'
+import { store } from '~/store/main'
+import UserModule from '~/store/user'
 export default Vue.extend({
   name: 'RegisterPage',
   data() {
     return {
-      email: '',
-      password: '',
+      formsRegister: {
+        email: 'felipe_modena@unesp.br',
+        password: '123456',
+      },
     }
   },
+  computed: {
+    userModuleConnection: () => getModule(UserModule, store),
+  },
   methods: {
+    onSubmit(event: Event) {
+      event.preventDefault()
+      this.userModuleConnection.createNewUserAction(this.formsRegister)
+
+      this.registerRoute()
+    },
     registerRoute() {
       const randomId = Math.floor(Math.random() * 1000).toString()
       this.$router.push({

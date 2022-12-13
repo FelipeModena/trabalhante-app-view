@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'app-view',
+    title: 'Trabalhante - %s',
     htmlAttrs: {
       lang: 'en',
     },
