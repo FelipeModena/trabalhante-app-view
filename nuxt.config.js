@@ -11,7 +11,7 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    script: [{ src: '/assets/plugins/hotjar/hotjar.js', mode: 'client' }],
+    script: [{ src: '/plugins/hotjar/hotjar.js', mode: 'client' }],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/logo.png' },
       {
