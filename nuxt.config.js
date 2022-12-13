@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Trabalhante - %s',
+    title: 'Trabalhante',
     htmlAttrs: {
       lang: 'en',
     },
@@ -11,6 +11,7 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
+    script: [{ src: '/assets/plugins/hotjar/hotjar.js', mode: 'client' }],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/logo.png' },
       {
@@ -19,7 +20,6 @@ export default {
       },
     ],
   },
-
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['./static/css/main.scss'],
 
@@ -33,6 +33,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
+    '@nuxtjs/google-analytics',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -44,6 +45,10 @@ export default {
   ],
   bootstrapVue: {
     icons: true,
+  },
+  googleAnalytics: {
+    // Options
+    id: 'G-SGFE10D2ED',
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
