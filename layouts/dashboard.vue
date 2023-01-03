@@ -51,8 +51,6 @@ export default Vue.extend({
   },
   created() {
     this.$nuxt.$on('changeUserNavBar', (id: any) => {
-      console.log(id);
-      
       this.companyModuleConnection.getBaseCompany(id)
     })
   },

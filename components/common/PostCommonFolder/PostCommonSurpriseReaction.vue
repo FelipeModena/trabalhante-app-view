@@ -31,7 +31,7 @@ export default Vue.extend({
   },
   methods: {
     voteSimple() {
-      this.$nuxt.$emit('voteEvent', 'surprise')
+      this.$nuxt.$emit('voteEvent', { id: this.id, reaction: 'surprise' })
     },
   },
 })
