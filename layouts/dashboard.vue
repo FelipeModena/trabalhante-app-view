@@ -1,8 +1,11 @@
 <template>
   <div>
-    <NavBar :user-name="user.userName" />
-    <SideBar :user-name="user.userName" />
-
+    <NavBar :user="user" />
+    <SideBar
+      :user-name="user.userName"
+      :user-accounts="users"
+      :user-id="user.id"
+    />
     <nuxt />
   </div>
 </template>
@@ -15,31 +18,43 @@ import NavBar from '~/components/dashboard/layout/NavBar.vue'
 import CompanyModule from '~/store/company'
 import { CompanyState } from '~/store/types/company'
 import UserModule from '~/store/user'
-import { UserState } from '~/store/types/user'
 import { store } from '~/store/main'
+import { UserState } from '~/store/types/user'
 
 export default Vue.extend({
   name: 'DashboardIndexPage',
   components: { SideBar, NavBar },
   layout: 'dashboard',
+
   computed: {
     companyModuleConnection: () => getModule(CompanyModule, store),
     userModuleConnection: () => getModule(UserModule, store),
-    user(): UserState {
-      return this.userModuleConnection.user
-    },
+
     companies(): CompanyState[] {
       return this.companyModuleConnection.companies
     },
+    companiesMock(): CompanyState[] {
+      return this.companyModuleConnection.companiesMock
+    },
+    user(): UserState {
+      return this.userModuleConnection.user
+    },
+    users(): UserState[] {
+      return this.userModuleConnection.usersMock
+    },
   },
   mounted() {
-    this.companyModuleConnection.getBaseCompany()
+    const queryId = (this.$router.currentRoute.query?.id || '1').toString()
+
+    this.companyModuleConnection.getBaseCompany(queryId)
+    this.userModuleConnection.getUSerById(queryId)
   },
-  methods: {
-    changeUserName() {
-      this.companyModuleConnection.updateCompanyAction('2')
-    },
-    logout() {},
+  created() {
+    this.$nuxt.$on('changeUserNavBar', (id: any) => {
+      console.log(id);
+      
+      this.companyModuleConnection.getBaseCompany(id)
+    })
   },
 })
 </script>

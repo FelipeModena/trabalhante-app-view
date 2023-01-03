@@ -3,7 +3,7 @@
     <b-col lg="">
       <b-card title="Vagas ativas">
         <div>
-          <h4>{{ companiesJobOpportunities.length ?? '' }}</h4>
+          <!-- <h4>{{ companiesJobOpportunities.length?companiesJobOpportunities.length:''  }}</h4> -->
         </div>
         <template #footer> <nuxt-link to="#">Ver mais</nuxt-link> </template>
       </b-card>

@@ -1,8 +1,10 @@
 import { Base } from "./common/Base"
 
 export interface UserState extends Base {
+  password?: string // remove this when implementing the login in a real API
   userName?: string
   isActive?: boolean
+  jobModel?: number
   messages?: string[]
   notifications?: string[]
   email?: string

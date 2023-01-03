@@ -1,0 +1,24 @@
+[
+  {
+    "id": "1",
+    "companyId": "1",
+    "title": "Complain 1",
+    "description": "Complain 1 description",
+    "status": "open",
+    "userStatus": 3,
+    "createdAt": "2020-01-01",
+    "updatedAt": "2020-01-01",
+    "categories": [{ "id": "1", "name": "Category 1" }]
+  },
+  {
+    "id": "2",
+    "companyId": "1",
+    "title": "Complain 2",
+    "description": "Complain 2 description",
+    "status": "open",
+    "userStatus": 1,
+    "createdAt": "2020-01-01",
+    "updatedAt": "2020-01-01",
+    "categories": [{ "id": "1", "name": "Category 1" }]
+  }
+]

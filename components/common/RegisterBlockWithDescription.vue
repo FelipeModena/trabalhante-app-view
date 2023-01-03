@@ -8,7 +8,8 @@
             Se você é uma empresa que busca novos talentos, cadastre-se e comece
             a divulgar suas vagas.
           </p>
-          <b-button variant="primary" href="login/register">Cadastrar</b-button>
+          <nuxt-link to="/login/register"><b-button variant="primary" >Cadastrar</b-button></nuxt-link>
+          
         </b-col>
       </b-row>
     </b-container>

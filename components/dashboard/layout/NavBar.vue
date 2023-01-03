@@ -6,14 +6,14 @@
         <b-img
           id="sidebar-no-header-title"
           center
-          src="logo-text.png"
+          src="/logo-text.png"
           width="40px"
         />
       </b-navbar-brand>
 
       <b-dropdown
         id="dropdown-dropright"
-        :text="companySelected.companyName"
+        :text="selectedCompany.companyName"
         class="m-2"
       >
         <b-dropdown-item
@@ -23,7 +23,7 @@
           href="#"
           @click="changeCompany(company.id || '')"
         >
-          {{ company.companyName }}
+          {{ company.companyName }} #{{ company.id }}
         </b-dropdown-item>
       </b-dropdown>
 
@@ -46,7 +46,7 @@
           </b-nav-form>
           <b-nav-item v-b-toggle.sidebar-no-header>
             <b-avatar />
-            <span class="mr-auto">{{ userName }}</span>
+            <span class="mr-auto">{{ user.userName }} {{user.id}}</span>
           </b-nav-item>
         </b-navbar-nav>
       </b-collapse>
@@ -80,9 +80,20 @@ import { CompanyState } from '~/store/types/company'
 export default Vue.extend({
   name: 'NavBar',
   props: {
-    userName: {
-      type: String,
-      default: 'user',
+    user: {
+      type: Object,
+      default: () => ({
+        userName: {
+          type: String,
+          default: 'user',
+          required: true,
+        },
+        userId: {
+          type: String,
+          default: 'user',
+          required: true,
+        },
+      }),
       required: true,
     },
   },
@@ -91,8 +102,10 @@ export default Vue.extend({
     companies(): CompanyState[] {
       return this.companyModuleConnection.companies
     },
-    companySelected(): CompanyState {
-      return this.companyModuleConnection.selectedCompany
+    selectedCompany(): CompanyState {
+      const company = this.companyModuleConnection.selectedCompany
+
+      return company
     },
   },
 

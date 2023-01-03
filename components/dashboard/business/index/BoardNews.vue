@@ -2,6 +2,7 @@
   <div class="my-3">
     <PostCommon
       v-for="(complain, index) in complains"
+      :id="complain.id"
       :key="index"
       class="my-4"
       :content="complain.description"
@@ -25,6 +26,11 @@ export default Vue.extend({
     complains(): ComplainState[] {
       return this.complainModuleConnection.complains
     },
+  },
+  created() {
+    this.$nuxt.$on('voteEvent', (vote: any) => {
+      console.log('rodou aqui' + vote)
+    })
   },
 })
 </script>

@@ -45,7 +45,7 @@
               <p>ou</p>
               <p>
                 Precisa de uma conta?
-                <nuxt-link class="text-secondary" to="login/register">
+                <nuxt-link class="text-secondary" to="/login/register">
                   Cadastre-se!</nuxt-link
                 >
               </p>

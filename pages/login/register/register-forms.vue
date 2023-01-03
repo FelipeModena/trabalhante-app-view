@@ -17,25 +17,20 @@
                 :formatter="formatter"
               ></b-form-input>
             </b-form-group>
-            <b-form-group
-              label="O que você procura?"
-              label-for="register-jobModel"
-            >
-              <b-form-select
-                id="register-jobModel"
-                v-model="jobModel"
-                :options="options"
-              ></b-form-select>
-            </b-form-group>
           </b-form>
 
           <NewCompanyUser
-            v-if="jobModel === 1"
+            v-if="jobModel === '1'"
             :cities="cities"
             :user-id="userId"
             :user-name="name"
           />
-          <NewNormalUser v-if="jobModel === 2" :cities="cities" />
+          <NewNormalUser
+            v-if="jobModel === '2'"
+            :cities="cities"
+            :user-id="userId"
+            :user-name="name"
+          />
         </b-card>
       </b-col>
     </b-row>
@@ -53,16 +48,17 @@ export default Vue.extend({
   data() {
     return {
       cities: citiesJson.states,
-      jobModel: 1,
       userId: '',
-      options: [
-        { value: 1, text: 'Contratar' },
-        { value: 2, text: 'Ser contratado' },
-      ],
+
       name: 'Felipe',
     }
   },
-
+  computed: {
+    jobModel(): string {
+      const jobModel = this.$router.currentRoute.query.jobModel.toString()
+      return jobModel
+    },
+  },
   created() {
     const id = this.$router.currentRoute.query.id
     if (!id) {

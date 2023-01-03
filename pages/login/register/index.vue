@@ -32,6 +32,16 @@
                     :formatter="formatter"
                   ></b-form-input>
                 </b-form-group>
+                <b-form-group
+                  label="O que você procura?"
+                  label-for="register-jobModel"
+                >
+                  <b-form-select
+                    id="register-jobModel"
+                    v-model="formsRegister.jobModel"
+                    :options="options"
+                  ></b-form-select>
+                </b-form-group>
                 <b-button class="w-100" variant="primary" type="submit"
                   >Criar nova conta</b-button
                 >
@@ -65,7 +75,12 @@ export default Vue.extend({
       formsRegister: {
         email: 'felipe_modena@unesp.br',
         password: '123456',
+        jobModel: 1,
       },
+      options: [
+        { value: 1, text: 'Contratar' },
+        { value: 2, text: 'Ser contratado' },
+      ],
     }
   },
   computed: {
@@ -82,7 +97,10 @@ export default Vue.extend({
       const randomId = Math.floor(Math.random() * 1000).toString()
       this.$router.push({
         path: '/login/register/register-forms',
-        query: { id: randomId },
+        query: {
+          id: randomId,
+          jobModel: this.formsRegister.jobModel.toString(),
+        },
       })
     },
     formatter(value: string) {

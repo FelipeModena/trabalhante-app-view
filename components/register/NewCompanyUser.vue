@@ -45,7 +45,7 @@
           rows="6"
         ></b-form-textarea>
       </b-form-group>
-      <b-button variant="primary" @click="submitNewCompanyUser()">{{
+      <b-button variant="primary" @click="submitNewCompanyUser">{{
         configText.formsButton
       }}</b-button>
     </b-form>
@@ -149,7 +149,9 @@ export default Vue.extend({
           companyStatus: {},
         })
       if (companyStoreStatus !== 1) {
-        this.$router.push('/dashboard')
+        this.$router.push({path:'/dashboard',query: { id: this.userId },})
+        
+
       }
     },
     formatter(value: string): string {
