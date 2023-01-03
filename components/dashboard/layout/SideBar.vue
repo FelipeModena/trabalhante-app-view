@@ -79,6 +79,7 @@ export default Vue.extend({
   methods: {
     changeUser(userId: any) {
       this.userModuleConnection.changeUserByIdAction(userId)
+
       this.$nuxt.$emit('changeUserNavBar', userId)
     },
   },

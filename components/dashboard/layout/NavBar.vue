@@ -13,9 +13,9 @@
 
       <b-dropdown
         id="dropdown-dropright"
-        :text="selectedCompany.companyName"
         class="m-2"
-      >
+        >
+        <!-- :text="selectedCompany.companyName" -->
         <b-dropdown-item
           v-for="company in companies"
           :key="company.id"

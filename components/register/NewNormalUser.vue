@@ -58,9 +58,6 @@ declare module 'vue/types/vue' {
     companyRoles: []
     companyDescription: string
     companyEmail: string
-    configText: {
-      formsButton: 'Criar nova conta com empresa'
-    }
     formatter: () => string
     submitNewCompanyUser: () => void
   }
@@ -96,7 +93,7 @@ export default Vue.extend({
       companyDescription: '',
       companyEmail: '',
       configText: {
-        formsButton: 'Criar nova conta com empresa',
+        formsButton: 'Criar nova conta',
       },
     }
   },
