@@ -1,0 +1,38 @@
+[
+  {
+    "userName": "Inae Soares de Figueiredo",
+    "password": "123456",
+    "isActive": true,
+    "messages": [],
+    "notifications": [],
+    "id": "1",
+    "email": "inae_figueiredo@unesp.br",
+    "first_name": "Inae",
+    "last_name": "Soares de Figueiredo",
+    "avatar": "",
+    "roles": [],
+    "permissions": ["user", "admin", "company-owner"],
+    "created_at": "10/10/2019 10:10:10",
+    "updated_at": "10/10/2022 10:13:10",
+    "deleted_at": "",
+    "sessionTime": 0
+  },
+  {
+    "userName": "Felipe Modena Colaborador",
+    "password": "123456",
+    "isActive": true,
+    "messages": [],
+    "notifications": [],
+    "id": "911",
+    "email": "felipe_modena@unesp.br",
+    "first_name": "",
+    "last_name": "",
+    "avatar": "",
+    "roles": [],
+    "permissions": ["user", "admin", "company-owner"],
+    "created_at": "10/10/2019 10:10:10",
+    "updated_at": "",
+    "deleted_at": "",
+    "sessionTime": 0
+  }
+]
