@@ -6,11 +6,9 @@ import UserMock from './mocks/user/user.mock.json'
 export default class UserModule extends VuexModule {
   user: UserState = this.getBaseUser() || {}
 
-  usersMock: UserState[] = UserMock
+  usersMock: UserState[] = UserMock 
 
-  token: any =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbGlwZS5rcm9pdG9yQGdtYWlsLmNvbSIsInRva2VuIjoiMzEyM2QxMmUzMTIzIiwibmFtZSI6IkZlbGlwZSBLcm9pdG9yIENhcmEgTW9kZW5hIiwiaWQiOjF9.81LoYmtdH5wxYW1XRxmdy8IqGiSsgTfcY-EuRhzEacceyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbGlwZS5rcm9pdG9yQGdtYWlsLmNvbSIsInRva2VuIjoiMzEyM2QxMmUzMTIzIiwibmFtZSI6IkZlbGlwZSBLcm9pdG9yIENhcmEgTW9kZW5hIiwiaWQiOjF9.81LoYmtdH5wxYW1XRxmdy8IqGiSsgTfcY-EuRhzEacc'
-
+  @Mutation
   getBaseUser() {
     let userLocal: any
 
@@ -18,7 +16,7 @@ export default class UserModule extends VuexModule {
       userLocal = JSON.parse(localStorage.getItem('userLocal') || '{}')
 
       if (userLocal) {
-        JSON.stringify(userLocal)
+        this.user = userLocal
         return userLocal
       }
       if (userLocal === undefined) {
@@ -51,13 +49,21 @@ export default class UserModule extends VuexModule {
 
   @Mutation
   getUserByIdMutation(id: string) {
-    let selectedUSer: UserState =
-      this.usersMock.find((user) => user.id === id) || {}
-    if (selectedUSer.id === undefined) {
-      selectedUSer = this.usersMock.find((user) => user.id === '1') || {}
-    }
+    const userLocal: UserState = JSON.parse(
+      localStorage.getItem('userLocal') || '{}'
+    )
+    this.usersMock.push(userLocal)
 
-    this.user = selectedUSer
+    if (JSON.stringify(userLocal) !== '{}') {
+      const selectedUSer: UserState =
+        this.usersMock.find((user) => user.id === userLocal.id) || {}
+
+      this.user = selectedUSer
+    } else {
+      const selectedUSer: UserState =
+        this.usersMock.find((user) => user.id === id) || {}
+      this.user = selectedUSer
+    }
   }
 
   @Mutation
@@ -66,18 +72,4 @@ export default class UserModule extends VuexModule {
     this.usersMock.push(this.user)
     localStorage.setItem('userLocal', JSON.stringify(this.user))
   }
-
-  // // make an action to get the older user based by deleted_at
-  // @Action
-  // getOlderUserAction() {
-  //   this.getOlderUserMutation()
-  // }
-
-  // @Mutation
-  // getOlderUserMutation() {
-  //   const olderUser = this.usersMock.reduce((older, current) =>
-  //     older.deleted_at > current.deleted_at ? older : current
-  //   )
-  //   this.user = olderUser
-  // }
 }

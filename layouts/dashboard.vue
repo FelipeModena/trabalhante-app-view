@@ -31,27 +31,26 @@ export default Vue.extend({
     userModuleConnection: () => getModule(UserModule, store),
 
     companies(): CompanyState[] {
-      return this.companyModuleConnection.companies
-    },
-    companiesMock(): CompanyState[] {
-      return this.companyModuleConnection.companiesMock
+      const companies = this.companyModuleConnection.companies
+
+      return companies
     },
     user(): UserState {
       return this.userModuleConnection.user
     },
     users(): UserState[] {
-      return this.userModuleConnection.usersMock
+      const userTeste = this.userModuleConnection.usersMock.slice(0, 5)
+      return userTeste
     },
   },
   mounted() {
     const queryId = (this.$router.currentRoute.query?.id || '1').toString()
 
-    this.companyModuleConnection.getBaseCompany(queryId)
     this.userModuleConnection.getUSerById(queryId)
   },
   created() {
-    this.$nuxt.$on('changeUserNavBar', (id: any) => {
-      this.companyModuleConnection.getBaseCompany(id)
+    this.$nuxt.$on('changeUserNavBar', (userID: any) => {
+      this.companyModuleConnection.changeCompanyAction(userID)
     })
   },
 })

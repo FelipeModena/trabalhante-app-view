@@ -5,27 +5,62 @@ import CompanyMock from './mocks/company/company.mock.json'
 import ComplainMock from './mocks/company/complain.mock.json'
 @Module({ namespaced: true, name: 'companyModule' })
 export default class CompanyModule extends VuexModule {
-  selectedCompany: CompanyState = {} as CompanyState
   companiesMock: CompanyState[] = CompanyMock
 
-  companies: CompanyState[] = this.getBaseCompany()
+  companies: CompanyState[] = this.getBaseCompanies()
+
+  selectedCompany: CompanyState = this.getBaseSelectedCompany()
 
   complains: ComplainState[] = ComplainMock as ComplainState[]
 
-  @Mutation
-  getBaseCompany() {
-    let companyLocal: any
-    if (process.browser) {
-      companyLocal = JSON.parse(localStorage.getItem('companyLocal') || '{}')
-      if (JSON.stringify(companyLocal) !== '{}') {
-        CompanyMock.push(companyLocal)
-        const companiesByID = CompanyMock.filter(
-          (company) => company.id === companyLocal.id
-        )[0]
-
-        return companiesByID
-      }
+  getBaseCompanies() {
+    if (!process.browser) {
+      return [] as CompanyState[]
     }
+
+    const companyLocal: CompanyState[] = JSON.parse(
+      localStorage.getItem('companyLocal') || '{}'
+    )
+
+    const userLocalID = JSON.parse(localStorage.getItem('userLocal') || '{}').id
+
+    if (JSON.stringify(companyLocal) !== '{}') {
+      companyLocal.forEach((company) => {
+        CompanyMock.push({
+          companyInfo: { city: company.companyInfo!.city || '' },
+          companyName: company.companyName || '',
+          companyStatus: { mensalSearches: 0, newReviews: 0 },
+          id: company.id || '',
+          periods: company.periods || ([] as any),
+          userId: company.userId || '',
+          jobOpportunities: [],
+        })
+      })
+
+      const companiesByID = CompanyMock.filter(
+        (company) => company.userId === userLocalID
+      )
+      return companiesByID
+    }
+    return [] as CompanyState[]
+  }
+
+  getBaseSelectedCompany() {
+    if (!process.browser) {
+      return {} as CompanyState
+    }
+
+    const selectedCompanyLocal: string =
+      localStorage.getItem('selectedCompany') || '{}'
+
+    if (JSON.stringify(selectedCompanyLocal) !== '{}') {
+      const companySelected = CompanyMock.find(
+        (company) => company.id === selectedCompanyLocal
+      )
+
+      return companySelected as any
+    }
+    return {} as CompanyState
   }
 
   @Mutation
@@ -46,10 +81,11 @@ export default class CompanyModule extends VuexModule {
   @Mutation
   addNewCompanyMutation(company: CompanyState) {
     if (process.client) {
-      const localMock = localStorage.getItem('companyLocal' || '{}')
-      const localMockParse = JSON.parse(localMock || '[]')
+      const localMockParse = JSON.parse(
+        localStorage.getItem('companyLocal') || '[]'
+      )
       localMockParse.push(company)
-      localStorage.setItem('companySelected', company.id || '')
+      localStorage.setItem('selectedCompany', company.id || '')
       localStorage.setItem('companyLocal', JSON.stringify(localMockParse))
     }
   }
@@ -68,27 +104,26 @@ export default class CompanyModule extends VuexModule {
   }
 
   @Action
-  changeCompany(id: string) {
-    this.changeActualCompanyMutation(id)
+  changeCompanyAction(userID: string) {
+    this.changeActualCompanyMutation(userID)
+  }
+
+  @Mutation
+  changeActualCompanyMutation(userID: string) {
     if (process.client) {
-      localStorage.setItem('companySelected', id)
+      // localStorage.setItem('selectedCompany', userID)
+      const selectedCompany = this.companiesMock.filter(
+        (company) => company.id === userID
+      )
+      return selectedCompany
     }
   }
 
   @Mutation
-  changeActualCompanyMutation(userId: string) {
-    console.log('id', userId)
-    const companySelected = this.companiesMock.filter(
-      (company) => company.id === userId
-    )
-    console.log('companySelected', companySelected)
-  }
-
-  @Mutation
   selectCompanyMutation(userId: string) {
-    const companySelectedId = localStorage.getItem('companySelected')
+    const selectedCompanyId = localStorage.getItem('selectedCompany')
 
-    if (companySelectedId) {
+    if (selectedCompanyId) {
       const companyByUserId = this.companies.find(
         (company) => company.userId === userId
       )
@@ -98,7 +133,7 @@ export default class CompanyModule extends VuexModule {
 
   @Action
   selectedCompanyAction(userId: string) {
-    localStorage.getItem('companySelected')
+    localStorage.getItem('selectedCompany')
     return this.selectCompanyMutation(userId)
   }
 }

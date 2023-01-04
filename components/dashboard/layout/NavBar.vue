@@ -14,8 +14,8 @@
       <b-dropdown
         id="dropdown-dropright"
         class="m-2"
-        >
-        <!-- :text="selectedCompany.companyName" -->
+        :text="selectedCompany.companyName"
+      >
         <b-dropdown-item
           v-for="company in companies"
           :key="company.id"
@@ -28,7 +28,6 @@
       </b-dropdown>
 
       <b-collapse id="nav-collapse" is-nav>
-        <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
           <b-nav-form>
             <b-form-input
@@ -46,7 +45,7 @@
           </b-nav-form>
           <b-nav-item v-b-toggle.sidebar-no-header>
             <b-avatar />
-            <span class="mr-auto">{{ user.userName }} {{user.id}}</span>
+            <span class="mr-auto">{{ user.userName }} {{ user.id }}</span>
           </b-nav-item>
         </b-navbar-nav>
       </b-collapse>
@@ -100,7 +99,9 @@ export default Vue.extend({
   computed: {
     companyModuleConnection: () => getModule(CompanyModule, store),
     companies(): CompanyState[] {
-      return this.companyModuleConnection.companies
+      const companies = this.companyModuleConnection.companies
+
+      return companies
     },
     selectedCompany(): CompanyState {
       const company = this.companyModuleConnection.selectedCompany
@@ -111,7 +112,7 @@ export default Vue.extend({
 
   methods: {
     changeCompany(id: string) {
-      this.companyModuleConnection.changeCompany(id)
+      this.companyModuleConnection.changeCompanyAction(id)
     },
   },
 })

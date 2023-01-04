@@ -29,7 +29,9 @@ export default Vue.extend({
   },
   created() {
     this.$nuxt.$on('voteEvent', (vote: any) => {
-      console.log('rodou aqui' + vote)
+      if (vote) {
+        vote++
+      }
     })
   },
 })
