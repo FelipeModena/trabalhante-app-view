@@ -3,6 +3,8 @@ import { CompanyState } from './types/company'
 import { ComplainState } from './types/complain'
 import CompanyMock from './mocks/company/company.mock.json'
 import ComplainMock from './mocks/company/complain.mock.json'
+import JobsMock from './mocks/jobs/jobs.mock.json'
+
 @Module({ namespaced: true, name: 'companyModule' })
 export default class CompanyModule extends VuexModule {
   companiesMock: CompanyState[] = CompanyMock
@@ -33,7 +35,9 @@ export default class CompanyModule extends VuexModule {
           id: company.id || '',
           periods: company.periods || ([] as any),
           userId: company.userId || '',
-          jobOpportunities: [],
+          jobOpportunities: JobsMock.filter(
+            (jobMock) => jobMock.companyId === company.id
+          ) as any,
         })
       })
 

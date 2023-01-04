@@ -6,7 +6,7 @@ import UserMock from './mocks/user/user.mock.json'
 export default class UserModule extends VuexModule {
   user: UserState = this.getBaseUser() || {}
 
-  usersMock: UserState[] = UserMock 
+  usersMock: UserState[] = UserMock as UserState[]
 
   @Mutation
   getBaseUser() {

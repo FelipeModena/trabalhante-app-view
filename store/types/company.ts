@@ -7,12 +7,13 @@ export interface PeriodCompanyEvaluationState {
   publicEvaluationsTotal?: number
   publicEvaluationsReplyTotal?: number
 }
-export interface JobOpportunityState {
-  id?: string
-  name?: string
+export interface JobOpportunityState extends Base {
+  companyId?: string
+  title?: string
   description?: string
+  salary?: number
+  applications?: number
   link?: string
-  date?: string
   status?: boolean
   clicks?: number
 }
@@ -23,7 +24,6 @@ export interface CompanyStatusState {
 }
 export interface CompanyBaseConfigState {
   email?: string
-  created_at?: string
   avatar?: string
 }
 
