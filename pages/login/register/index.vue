@@ -21,6 +21,7 @@
                     :formatter="formatter"
                     autofocus
                     required
+                    :disabled="formsRegister.demo"
                   ></b-form-input>
                 </b-form-group>
                 <b-form-group label="Senha" label-for="login-password">
@@ -30,6 +31,7 @@
                     type="password"
                     required
                     :formatter="formatter"
+                    :disabled="formsRegister.demo"
                   ></b-form-input>
                 </b-form-group>
                 <b-form-group
@@ -42,6 +44,16 @@
                     :options="options"
                   ></b-form-select>
                 </b-form-group>
+
+                <b-form-checkbox
+                  id="input-5"
+                  v-model="formsRegister.demo"
+                  switch
+                  :true-value="true"
+                  :false-value="false"
+                >
+                  Versão demonstrativa
+                </b-form-checkbox>
                 <b-button class="w-100" variant="primary" type="submit"
                   >Criar nova conta</b-button
                 >
@@ -66,6 +78,7 @@
 <script lang="ts">
 import { getModule } from 'nuxt-property-decorator'
 import Vue from 'vue'
+import CompanyModule from '~/store/company'
 import { store } from '~/store/main'
 import UserModule from '~/store/user'
 export default Vue.extend({
@@ -73,9 +86,10 @@ export default Vue.extend({
   data() {
     return {
       formsRegister: {
-        email: 'felipe_modena@unesp.br',
-        password: '123456',
+        email: '',
+        password: '',
         jobModel: 1,
+        demo: false,
       },
       options: [
         { value: 1, text: 'Contratar' },
@@ -85,23 +99,31 @@ export default Vue.extend({
   },
   computed: {
     userModuleConnection: () => getModule(UserModule, store),
+    companyModuleConnection: () => getModule(CompanyModule, store),
   },
   methods: {
     onSubmit(event: Event) {
       event.preventDefault()
-      this.userModuleConnection.createNewUserAction(this.formsRegister)
 
       this.registerRoute()
     },
     registerRoute() {
-      const randomId = Math.floor(Math.random() * 1000).toString()
-      this.$router.push({
-        path: '/login/register/register-forms',
-        query: {
-          id: randomId,
-          jobModel: this.formsRegister.jobModel.toString(),
-        },
-      })
+      if (this.formsRegister.demo === true) {
+        this.userModuleConnection.setMockUserAction(this.formsRegister.jobModel)
+        if (this.formsRegister.jobModel === 1) {
+          this.companyModuleConnection.setMockCompaniesAction()
+        }
+        this.$router.push('/dashboard')
+      } else {
+        const randomId = Math.floor(Math.random() * 1000).toString()
+        this.$router.push({
+          path: '/login/register/register-forms',
+          query: {
+            id: randomId,
+            jobModel: this.formsRegister.jobModel.toString(),
+          },
+        })
+      }
     },
     formatter(value: string) {
       return value.toLowerCase()

@@ -20,6 +20,7 @@ import { CompanyState } from '~/store/types/company'
 import UserModule from '~/store/user'
 import { store } from '~/store/main'
 import { UserState } from '~/store/types/user'
+import JobModule from '~/store/jobs'
 
 export default Vue.extend({
   name: 'DashboardIndexPage',
@@ -29,6 +30,12 @@ export default Vue.extend({
   computed: {
     companyModuleConnection: () => getModule(CompanyModule, store),
     userModuleConnection: () => getModule(UserModule, store),
+    jobModuleConnection: () => getModule(JobModule, store),
+
+    jobMocks(): any {
+      const jobMock = this.jobModuleConnection.jobsMock
+      return jobMock
+    },
 
     companies(): CompanyState[] {
       const companies = this.companyModuleConnection.companies

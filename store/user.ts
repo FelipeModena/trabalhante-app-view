@@ -72,4 +72,27 @@ export default class UserModule extends VuexModule {
     this.usersMock.push(this.user)
     localStorage.setItem('userLocal', JSON.stringify(this.user))
   }
+
+  // section for mocks
+
+  // Action to set mock user by option. if option 1, get user with id ac3f648d-0800-4d03-9c9a-15feb6e29601, and if option 2, get user with id 7d662b38-0253-4125-a338-2c2605a177b9, and set this user in localStorage
+  @Action
+  setMockUserAction(option: number) {
+    this.setMockUserMutation(option)
+  }
+
+  @Mutation
+  setMockUserMutation(option: number) {
+    if (option === 1) {
+      const user = UserMock.find(
+        (user) => user.id === 'ac3f648d-0800-4d03-9c9a-15feb6e29601'
+      )
+      localStorage.setItem('userLocal', JSON.stringify(user))
+    } else if (option === 2) {
+      const user = UserMock.find(
+        (user) => user.id === '7d662b38-0253-4125-a338-2c2605a177b9'
+      )
+      localStorage.setItem('userLocal', JSON.stringify(user))
+    }
+  }
 }

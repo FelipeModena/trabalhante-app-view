@@ -23,7 +23,7 @@
           href="#"
           @click="changeCompany(company.id || '')"
         >
-          {{ company.companyName }} #{{ company.id }}
+          {{ company.companyName }} #{{ company.id?.substring(0, 5) }}
         </b-dropdown-item>
       </b-dropdown>
 
@@ -45,7 +45,7 @@
           </b-nav-form>
           <b-nav-item v-b-toggle.sidebar-no-header>
             <b-avatar />
-            <span class="mr-auto">{{ user.userName }} {{ user.id }}</span>
+            <span class="mr-auto">{{ user.userName }} </span>
           </b-nav-item>
         </b-navbar-nav>
       </b-collapse>

@@ -11,24 +11,12 @@
       <b-container>
         <b-row align-h="center" class="my-4">
           <b-col cols="7">
-            <b-avatar size="150px" />
+            <b-avatar size="150px" :src="user.avatar ?? '' " />
             <div class="text-center">
               <nav class="mb-3">
                 <b-nav vertical>
                   <b-nav-item href="#link-1" @click="hide"
                     ><p>Meu perfil</p>
-                  </b-nav-item>
-                  <p>Outras contas</p>
-                  <b-nav-item
-                    v-for="user in userAccounts"
-                    :key="user.id"
-                    :disabled="userId === user.id"
-                    @click="hide"
-                  >
-                    <div @click="changeUser(user.id)">
-                      <b-avatar></b-avatar>
-                      <p>{{ user.userName }}</p>
-                    </div>
                   </b-nav-item>
                 </b-nav>
               </nav>
@@ -75,6 +63,9 @@ export default Vue.extend({
   },
   computed: {
     userModuleConnection: () => getModule(UserModule, store),
+    user(): UserState {
+      return this.userModuleConnection.user
+    },
   },
   methods: {
     changeUser(userId: any) {

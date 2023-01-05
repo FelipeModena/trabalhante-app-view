@@ -9,7 +9,8 @@
         <b-container class="pt-2">
           <b-row
             v-if="
-              companyPeriod.averageGrade > 7 && companyPeriod.averageGrade <= 10
+              companyPeriod.averageGrade >= 70 &&
+              companyPeriod.averageGrade <= 100
             "
           >
             <b-col>
@@ -23,7 +24,8 @@
 
           <b-row
             v-if="
-              companyPeriod.averageGrade < 7 && companyPeriod.averageGrade >= 5
+              companyPeriod.averageGrade < 70 &&
+              companyPeriod.averageGrade >= 50
             "
           >
             <b-col> <b-icon-emoji-neutral variant="" font-scale="4" /></b-col>
@@ -31,7 +33,7 @@
               <h5>Bom</h5>
             </b-col>
           </b-row>
-          <b-row v-if="companyPeriod.averageGrade < 5">
+          <b-row v-if="companyPeriod.averageGrade < 50">
             <b-col>
               <b-icon-emoji-angry variant="danger" font-scale="4"
             /></b-col>
@@ -85,8 +87,7 @@ export default Vue.extend({
   computed: {
     companyModuleConnection: () => getModule(CompanyModule, store),
     companiesPeriod(): PeriodCompanyEvaluationState[] {
-      // return this.companyModuleConnection.selectedCompany.periods ?? []
-      return []
+      return this.companyModuleConnection.selectedCompany.periods ?? []
     },
   },
 })

@@ -5,6 +5,8 @@ import CompanyMock from './mocks/company/company.mock.json'
 import ComplainMock from './mocks/company/complain.mock.json'
 import JobsMock from './mocks/jobs/jobs.mock.json'
 
+const userIDMock = 'ac3f648d-0800-4d03-9c9a-15feb6e29601'
+
 @Module({ namespaced: true, name: 'companyModule' })
 export default class CompanyModule extends VuexModule {
   companiesMock: CompanyState[] = CompanyMock
@@ -25,6 +27,9 @@ export default class CompanyModule extends VuexModule {
     )
 
     const userLocalID = JSON.parse(localStorage.getItem('userLocal') || '{}').id
+    if (userLocalID === userIDMock) {
+      return companyLocal
+    }
 
     if (JSON.stringify(companyLocal) !== '{}') {
       companyLocal.forEach((company) => {
@@ -139,5 +144,39 @@ export default class CompanyModule extends VuexModule {
   selectedCompanyAction(userId: string) {
     localStorage.getItem('selectedCompany')
     return this.selectCompanyMutation(userId)
+  }
+
+  @Action
+  changeJobOpportunityAction(job: any) {
+    this.changeJobOpportunitiesMutation(job)
+  }
+
+  @Mutation
+  changeJobOpportunitiesMutation(job: any) {
+    const selectedCompany = this.selectedCompany
+    const jobOpportunities = selectedCompany.jobOpportunities
+    const jobIndex = jobOpportunities!.findIndex(
+      (jobOpportunity: any) => jobOpportunity.id === job.id
+    )
+    jobOpportunities![jobIndex] = job
+    selectedCompany.jobOpportunities = jobOpportunities
+    this.selectedCompany = selectedCompany
+  }
+
+  // section for mocks
+
+  @Action
+  setMockCompaniesAction() {
+    this.setMockCompaniesMutation()
+  }
+
+  @Mutation
+  setMockCompaniesMutation() {
+    const companies = CompanyMock.filter(
+      (company) => company.userId === 'ac3f648d-0800-4d03-9c9a-15feb6e29601'
+    )
+
+    localStorage.setItem('selectedCompany', companies[0].id)
+    localStorage.setItem('companyLocal', JSON.stringify(companies))
   }
 }

@@ -38,7 +38,7 @@
             </p>
             <b-button
               :to="{
-                path: '/dashboard/jobs/jobdetail',
+                path: '/dashboard/jobs/jobDetail',
                 query: { id: jobOpportunity.id },
               }"
               variant="primary"
@@ -70,20 +70,17 @@ export default Vue.extend({
   computed: {
     companyModuleConnection: () => getModule(CompanyModule, store),
     companiesJobOpportunities(): JobOpportunityState[] {
-      const jobOpportunitiesTableItems =
-        this.companyModuleConnection.selectedCompany.jobOpportunities?.map(
-          (jobOpportunity) => {
-            return {
-              id: jobOpportunity.id,
-              title: jobOpportunity.title,
-              status: jobOpportunity.status,
-              salary: jobOpportunity.salary,
-              description: jobOpportunity.description,
-            }
+      return this.companyModuleConnection.selectedCompany.jobOpportunities?.map(
+        (jobOpportunity) => {
+          return {
+            id: jobOpportunity.id,
+            title: jobOpportunity.title,
+            status: jobOpportunity.status,
+            salary: jobOpportunity.salary,
+            description: jobOpportunity.description,
           }
-        )
-
-      return jobOpportunitiesTableItems as JobOpportunityState[]
+        }
+      ) as JobOpportunityState[]
     },
   },
 })
