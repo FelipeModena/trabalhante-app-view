@@ -14,10 +14,10 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-dropdown
-        v-if="companies"
+          v-if="companies"
           id="dropdown-dropright"
           class="m-2"
-          :text="selectedCompany.companyName"
+          :text="selectedCompany?.companyName"
         >
           <b-dropdown-item
             v-for="company in companies"
@@ -88,11 +88,13 @@ export default Vue.extend({
     companies(): CompanyState[] {
       const companies = this.companyModuleConnection.companies
 
-      return companies
+      return companies || []
     },
     selectedCompany(): CompanyState {
       const company = this.companyModuleConnection.selectedCompany
-
+      if (!company) {
+        // this.$router.push('/login/register')
+      }
       return company
     },
   },
@@ -104,5 +106,3 @@ export default Vue.extend({
   },
 })
 </script>
-
-

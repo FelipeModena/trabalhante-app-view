@@ -3,7 +3,7 @@
     <b-row align-h="center" align-v="center" class="mt-5">
       <b-col lg="6" md="">
         <b-card align="center">
-          <b-img class="mx-auto" src="/logo.png" width="100px" />
+          <b-img class="mx-auto" src="/img/common/logo.png" width="100px" />
 
           <b-row class="text-left">
             <b-col>
@@ -61,6 +61,7 @@
 import Vue from 'vue'
 export default Vue.extend({
   name: 'LoginPage',
+  layout: 'numb',
   data() {
     return {
       formsLogin: {

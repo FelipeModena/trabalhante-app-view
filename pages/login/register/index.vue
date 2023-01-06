@@ -2,7 +2,7 @@
   <b-container class="mt-5">
     <b-row class="pt-5">
       <b-col lg="7" class="px-5 text-center">
-        <b-img class="mx-auto my-3" src="/logo-text.png" fluid />
+        <b-img class="mx-auto my-3" src="/img/common/logo-text.png" fluid />
         <h2>
           Uma nova forma de encontrar pessoas e ambientes de trabalho
           compatíveis ao seu modelo!
@@ -83,6 +83,7 @@ import { store } from '~/store/main'
 import UserModule from '~/store/user'
 export default Vue.extend({
   name: 'RegisterPage',
+  layout:'numb',
   data() {
     return {
       formsRegister: {
