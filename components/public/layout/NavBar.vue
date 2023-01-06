@@ -11,10 +11,9 @@
           width="100px"
         />
       </b-navbar-brand>
-
       <b-collapse id="nav-collapse" is-nav>
         <b-dropdown
-          v-if="companies"
+          v-if="companies.length"
           id="dropdown-dropright"
           class="m-2"
           :text="selectedCompany?.companyName"
@@ -48,10 +47,11 @@
               >Search</b-button
             >
           </b-nav-form> -->
-          <b-nav-item v-b-toggle.sidebar-no-header>
+          <b-nav-item v-if="user.id" v-b-toggle.sidebar-no-header>
             <b-avatar />
             <span class="mr-auto">{{ user.userName }} </span>
           </b-nav-item>
+          <b-nav-item v-else href="/login"><b-button variant="danger">Você aind nao está logado</b-button></b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>

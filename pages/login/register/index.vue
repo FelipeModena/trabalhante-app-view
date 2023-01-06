@@ -41,19 +41,18 @@
                   <b-form-select
                     id="register-jobModel"
                     v-model="formsRegister.jobModel"
+                    :disabled="formsRegister.demo"
                     :options="options"
                   ></b-form-select>
                 </b-form-group>
-
-                <b-form-checkbox
-                  id="input-5"
-                  v-model="formsRegister.demo"
-                  switch
-                  :true-value="true"
-                  :false-value="false"
+                <b-button
+                  class="my-4"
+                  :variant="formsRegister.demo ? 'primary' : 'success'"
+                  @click="formsRegister.demo = !formsRegister.demo"
                 >
+                  <b-spinner small type="grow"></b-spinner>
                   Versão demonstrativa
-                </b-form-checkbox>
+                </b-button>
                 <b-button class="w-100" variant="primary" type="submit"
                   >Criar nova conta</b-button
                 >
@@ -83,7 +82,7 @@ import { store } from '~/store/main'
 import UserModule from '~/store/user'
 export default Vue.extend({
   name: 'RegisterPage',
-  layout:'numb',
+  layout: 'numb',
   data() {
     return {
       formsRegister: {
