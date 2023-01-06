@@ -1,8 +1,8 @@
 <template>
   <div>
+    <register-block-with-description  class="mb-5"/>
     <main-slider />
-    <description-advantages />
-    <register-block-with-description />
+    <!-- <description-advantages /> -->
   </div>
 </template>
 
