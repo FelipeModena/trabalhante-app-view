@@ -1,14 +1,17 @@
 <template>
   <div class="my-3">
-    <PostCommon
-      v-for="(complain, index) in complains"
-      :id="complain.id"
-      :key="index"
-      class="my-4"
-      :content="complain.description"
-      :title="complain.title"
-      :user-status="complain.userStatus"
-    />
+    <b-card title="Avaliações">
+      <PostCommon
+        v-for="complain in complains"
+        :id="complain.id"
+        :key="complain.id"
+        class="my-4"
+        :rate="complain.relevance"
+        :content="complain.description"
+        :title="complain.title"
+        :reference="complain.creatorReference"
+      />
+    </b-card>
   </div>
 </template>
 
@@ -21,10 +24,12 @@ import PostCommon from '~/components/common/PostCommon.vue'
 import { ComplainState } from '~/store/types/complain'
 export default Vue.extend({
   components: { PostCommon },
+
   computed: {
     complainModuleConnection: () => getModule(CompanyModule, store),
     complains(): ComplainState[] {
-      return this.complainModuleConnection.complains
+      const pagesOfComplains = this.complainModuleConnection.complains
+      return pagesOfComplains
     },
   },
   created() {

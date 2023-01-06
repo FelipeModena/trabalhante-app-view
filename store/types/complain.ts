@@ -6,7 +6,6 @@ export interface ComplainState {
   id?: string
   companyId?: string
   title?: string
-  rate?: number
   userStatus?: number
   hashtags?: string[]
   description?: string
@@ -14,4 +13,8 @@ export interface ComplainState {
   createdAt?: string
   updatedAt?: string
   categories?: [CategoryComplainState]
+  relevance?: number
+  creatorReference?: number
+  creatorId?: string
+  receiverId?: string
 }

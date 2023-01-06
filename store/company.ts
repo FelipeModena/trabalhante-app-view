@@ -14,8 +14,10 @@ export default class CompanyModule extends VuexModule {
   companies: CompanyState[] = this.getBaseCompanies()
 
   selectedCompany: CompanyState = this.getBaseSelectedCompany()
+  selectedComapanyComplains: ComplainState[] =
+    this.getBaseSelectedCompanyComplains()
 
-  complains: ComplainState[] = ComplainMock as ComplainState[]
+  complains: ComplainState[] = ComplainMock as ComplainState[] | []
 
   getBaseCompanies() {
     if (!process.browser) {
@@ -70,6 +72,24 @@ export default class CompanyModule extends VuexModule {
       return companySelected as any
     }
     return {} as CompanyState
+  }
+
+  getBaseSelectedCompanyComplains() {
+    if (!process.browser) {
+      return [] as ComplainState[]
+    }
+
+    const selectedCompanyLocal: string =
+      localStorage.getItem('selectedCompany') || '{}'
+
+    if (JSON.stringify(selectedCompanyLocal) !== '{}') {
+      const companySelected = ComplainMock.filter(
+        (complain) => complain.receiverId === selectedCompanyLocal
+      )
+
+      return companySelected as any
+    }
+    return [] as ComplainState[]
   }
 
   @Mutation

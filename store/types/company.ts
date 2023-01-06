@@ -21,6 +21,7 @@ export interface CompanyStatusState {
   mensalSearches?: number
   newReviews?: number
   notifications?: string[]
+  lastMonthGrade?: number
 }
 export interface CompanyBaseConfigState {
   email?: string
@@ -30,6 +31,7 @@ export interface CompanyBaseConfigState {
 export interface CompanyInfoState {
   city?: string
   uf?: string
+  lastMonthGrade?: number
 }
 
 export interface CompanyState extends Base {
@@ -44,4 +46,5 @@ export interface CompanyState extends Base {
   configurations?: CompanyBaseConfigState
   periods?: PeriodCompanyEvaluationState[]
   jobOpportunities?: JobOpportunityState[]
+  logo?: string
 }

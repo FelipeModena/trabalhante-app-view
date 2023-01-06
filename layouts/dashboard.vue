@@ -1,6 +1,24 @@
 <template>
   <div>
     <NavBar :user="user" />
+    <b-container id="dashboard-nav-bar-redirector">
+      <b-row class="mx-auto">
+        <b-col lg="12">
+          <b-nav id="nav-bar-routes-container" align="center">
+            <b-nav-item to="/dashboard">Início</b-nav-item>
+            <b-nav-item to="/dashboard/jobs">Vagas</b-nav-item>
+            <b-nav-item to="/dashboard/interview" disabled
+              >Entrevistas</b-nav-item
+            >
+            <b-nav-item to="/dashboard/reports" disabled>Relatórios</b-nav-item>
+            <b-nav-item to="/dashboard/collaborators" disabled
+              >Colaboradores</b-nav-item
+            >
+            <b-nav-item to="/dashboard/configuracoes">Configurações</b-nav-item>
+          </b-nav>
+        </b-col>
+      </b-row>
+    </b-container>
     <SideBar
       :user-name="user.userName"
       :user-accounts="users"
@@ -12,8 +30,8 @@
 
 <script lang="ts">
 import { getModule, Vue } from 'nuxt-property-decorator'
-import SideBar from '~/components/dashboard/layout/SideBar.vue'
-import NavBar from '~/components/dashboard/layout/NavBar.vue'
+import SideBar from '~/components/public/layout/SideBar.vue'
+import NavBar from '~/components/public/layout/NavBar.vue'
 
 import CompanyModule from '~/store/company'
 import { CompanyState } from '~/store/types/company'
@@ -66,5 +84,16 @@ export default Vue.extend({
 <style lang="scss">
 body {
   background-color: rgb(249, 244, 244);
+}
+
+#dashboard-nav-bar-redirector {
+  margin-top: -15px;
+  margin-bottom: 15px;
+}
+
+#nav-bar-routes-container {
+  box-shadow: -1px 9px 12px -10px rgba(0, 0, 0, 0.75);
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
 }
 </style>

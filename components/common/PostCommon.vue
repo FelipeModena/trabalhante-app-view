@@ -1,12 +1,17 @@
 <template>
   <b-card>
     <p>
-      <strong v-if="userStatus === 1">Funcionário atual</strong>
-      <strong v-else-if="userStatus === 2">Ex-funcionário</strong>
+      <strong v-if="reference === 1">Funcionário atual</strong>
+
+      <strong v-else-if="reference === 2">Ex-funcionário</strong>
       <strong v-else>Não é mais funcionário</strong>
     </p>
-    <p>Nota: {{ rate }}</p>
-
+    <p>
+      Relevância:
+      <span v-if="rate >= 70">Alta</span>
+      <span v-else-if="rate >= 40 && rate < 70">Média</span>
+      <span v-else-if="rate <= 40">Baixa</span>
+    </p>
     <h4>{{ title }}</h4>
     <p>{{ content }}</p>
     <template #footer>
@@ -64,6 +69,7 @@ export default Vue.extend({
     id: {
       type: String,
       default: Math.random(),
+      required: true,
     },
     title: {
       type: String,
@@ -71,7 +77,7 @@ export default Vue.extend({
     },
     content: {
       type: String,
-      default: 'Content of the post',
+      default: '',
     },
     date: {
       type: String,
@@ -81,7 +87,8 @@ export default Vue.extend({
       type: Number,
       default: 4.3,
     },
-    userStatus: {
+
+    reference: {
       type: Number,
       default: 1,
     },

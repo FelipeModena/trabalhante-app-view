@@ -1,26 +1,26 @@
 <template>
-  <b-row>
+  <b-row class="text-center">
     <b-col lg="">
       <b-card title="Vagas ativas">
-        <div>
-          <!-- <h4>{{ companiesJobOpportunities.length?companiesJobOpportunities.length:''  }}</h4> -->
-        </div>
+        <h4>
+          {{
+            companiesJobOpportunities.length
+              ? companiesJobOpportunities.length
+              : ''
+          }}
+        </h4>
         <template #footer> <nuxt-link to="#">Ver mais</nuxt-link> </template>
       </b-card>
     </b-col>
     <b-col>
       <b-card bg-variant="" title="Novas reviews">
-        <div>
-          <!-- <h4>{{ companies.companyStatus.newReviews ?? '' }}</h4> -->
-        </div>
+        <h4>{{ companies.companyStatus.newReviews ?? '' }}</h4>
         <template #footer> <nuxt-link to="#">Ver mais</nuxt-link> </template>
       </b-card>
     </b-col>
     <b-col>
       <b-card title="Busca mensal">
-        <div>
-          <!-- <h4>{{ companies.companyStatus.mensalSearches ?? '' }}</h4> -->
-        </div>
+        <h4>{{ companies.companyStatus.mensalSearches ?? '' }}</h4>
         <template #footer> <nuxt-link to="#">Ver mais</nuxt-link> </template>
       </b-card>
     </b-col>
