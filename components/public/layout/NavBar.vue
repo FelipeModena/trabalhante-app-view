@@ -51,7 +51,7 @@
             <b-avatar />
             <span class="mr-auto">{{ user.userName }} </span>
           </b-nav-item>
-          <b-nav-item v-else href="/login"><b-button variant="danger">Você aind nao está logado</b-button></b-nav-item>
+          <b-nav-item v-else href="/login"><b-button variant="danger">Você ainda nao está logado</b-button></b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
