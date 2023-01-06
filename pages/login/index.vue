@@ -27,7 +27,11 @@
                     :formatter="formatter"
                   ></b-form-input>
                 </b-form-group>
-                <b-button type="submit" class="w-100" variant="primary"
+                <b-button
+                  type="submit"
+                  class="w-100"
+                  variant="primary"
+                  :disabled="loading"
                   >Entrar</b-button
                 >
               </b-form>
@@ -58,7 +62,11 @@
 </template>
 
 <script lang="ts">
+import { getModule } from 'nuxt-property-decorator'
 import Vue from 'vue'
+import CompanyModule from '~/store/company'
+import { store } from '~/store/main'
+import UserModule from '~/store/user'
 export default Vue.extend({
   name: 'LoginPage',
   layout: 'numb',
@@ -68,14 +76,46 @@ export default Vue.extend({
         email: '',
         password: '',
       },
+      loading: false,
+      toastCount: 0,
     }
+  },
+  computed: {
+    userModuleConnection: () => getModule(UserModule, store),
+    companyModuleConnection: () => getModule(CompanyModule, store),
   },
   methods: {
     onSubmit(event: Event) {
       event.preventDefault()
+      this.loading = true
+      // add loading effect
+      this.userModuleConnection.usersMock.find((user) => {
+        if (
+          user.email === this.formsLogin.email &&
+          user.password === this.formsLogin.password
+        ) {
+          this.userModuleConnection.setMockUserAction(1)
+          this.$router.push('/dashboard')
+          return true
+        }
 
+        return false
+      })
+      setTimeout(() => {
+        this.loading = false
+        this.makeToast()
+      }, 2000)
       // validate form and login, then redirect to dashboard home
-      this.$router.push('/dashboard')
+    },
+
+    makeToast(append = false) {
+      this.toastCount++
+      this.$bvToast.toast('Usuario ou senha incorretos, verrifique se os campos estão preenchidos corretamente', {
+        title: 'Falha no login',
+        autoHideDelay: 5000,
+        variant: 'danger',
+        appendToast: append,
+      })
     },
     formatter(value: string) {
       return value.toLowerCase()
