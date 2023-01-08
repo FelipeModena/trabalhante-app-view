@@ -15,12 +15,12 @@
           <companies-list
             :companies="goodCompanies"
             :variant="'success'"
-            :title="'Melhores empresas que mais resolveram'"
+            :title="'Melhores empresas conforme avaliação'"
           />
           <companies-list
             :companies="badCompanies"
             :variant="'danger'"
-            :title="'Empresas em que mais reclamaram'"
+            :title="' Piores empresas conforme avaliação'"
           />
         </b-row>
       </b-container>

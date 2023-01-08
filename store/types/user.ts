@@ -1,4 +1,5 @@
 import { Base } from './common/Base'
+import { CompanyState } from './company'
 
 export interface UserState extends Base {
   password?: string // remove this when implementing the login in a real API
@@ -13,4 +14,5 @@ export interface UserState extends Base {
   roles?: string[]
   permissions?: string[]
   sessionTime?: number
+  companies: CompanyState[]
 }

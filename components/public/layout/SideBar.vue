@@ -11,7 +11,10 @@
       <b-container>
         <b-row align-h="center" class="my-4">
           <b-col cols="7">
-            <b-avatar size="150px" :src="user.avatar ?? '' " />
+            <b-avatar
+              size="150px"
+              :src="user.avatar ?? '/img/common/reactions/surprise.jpg'"
+            />
             <div class="text-center">
               <nav class="mb-3">
                 <b-nav vertical>
@@ -35,32 +38,17 @@
     </template>
   </b-sidebar>
 </template>
+
 <script lang="ts">
 import { getModule } from 'nuxt-property-decorator'
-import Vue, { PropType } from 'vue'
+import Vue from 'vue'
 import { store } from '~/store/main'
 import { UserState } from '~/store/types/user'
 import UserModule from '~/store/user'
 
 export default Vue.extend({
   name: 'SidebarLayoutComponent',
-  props: {
-    userAccounts: {
-      type: Array as PropType<Array<UserState>>,
-      default: () => [],
-      required: true,
-    },
-    userName: {
-      type: String,
-      default: '',
-      required: true,
-    },
-    userId: {
-      type: String,
-      default: '',
-      required: true,
-    },
-  },
+  props: {},
   computed: {
     userModuleConnection: () => getModule(UserModule, store),
     user(): UserState {

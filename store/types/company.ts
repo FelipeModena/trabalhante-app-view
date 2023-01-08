@@ -18,10 +18,10 @@ export interface JobOpportunityState extends Base {
   clicks?: number
 }
 export interface CompanyStatusState {
-  mensalSearches?: number
-  newReviews?: number
-  notifications?: string[]
-  lastMonthGrade?: number
+  mensalSearches: number
+  newReviews: number
+  notifications: string[] | null
+  lastMonthGrade: number
 }
 export interface CompanyBaseConfigState {
   email?: string
@@ -33,13 +33,17 @@ export interface CompanyInfoState {
   uf?: string
   lastMonthGrade?: number
 }
+export interface AttributeState {
+  attribute: string 
+  rating: number 
+}
 
 export interface CompanyState extends Base {
   userId?: string
   companyName?: string
   socialName?: string
   description?: string
-  companyInfo?: CompanyInfoState
+  companyInfo: CompanyInfoState
   companyStatus: CompanyStatusState
   roles?: string[]
   messages?: string[]
@@ -47,4 +51,5 @@ export interface CompanyState extends Base {
   periods?: PeriodCompanyEvaluationState[]
   jobOpportunities?: JobOpportunityState[]
   logo?: string
+  attributes:  AttributeState[]
 }

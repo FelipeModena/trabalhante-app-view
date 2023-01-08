@@ -19,11 +19,7 @@
         </b-col>
       </b-row>
     </b-container>
-    <SideBar
-      :user-name="user.userName"
-      :user-accounts="users"
-      :user-id="user.id"
-    />
+    <SideBar />
     <nuxt />
   </div>
 </template>

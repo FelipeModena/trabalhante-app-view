@@ -14,8 +14,10 @@
           </b-col>
           <b-col cols="8">
             <b-row>
-              <b-col>
-                <h4>{{ company.companyName }}</h4>
+              <b-col> 
+                <!-- cut string if above 20 chars -->
+                  
+                 <h4>{{  company.companyName }}</h4>
               </b-col>
             </b-row>
           </b-col>

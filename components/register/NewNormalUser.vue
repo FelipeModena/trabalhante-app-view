@@ -1,10 +1,18 @@
 <template>
   <div>
     <b-form>
-      <b-form-group
+      <!-- <b-form-group
         label="Nome da sua empresa"
         label-for="register-company-name"
       >
+        <b-form-input
+          id="register-company-name"
+          v-model="companyName"
+          type="text"
+          :formatter="formatter"
+        ></b-form-input>
+      </b-form-group> -->
+      <b-form-group label="CPF" label-for="register-company-name">
         <b-form-input
           id="register-company-name"
           v-model="companyName"
@@ -25,6 +33,13 @@
           v-model="companyCity"
           :options="citiesFromUF"
         ></b-form-select>
+      </b-form-group>
+      <b-form-group
+        label="Histórico de organizações"
+        label-for="register-uf"
+        description="Organizações passadas ou atual orgranização em que você trabalha ou trabalhou"
+      >
+        <b-form-tags v-model="companiesHistory" input-id="tags-basic"></b-form-tags>
       </b-form-group>
       <b-form-group
         label="Setores de atuação"
@@ -55,7 +70,8 @@ declare module 'vue/types/vue' {
     companyCnpj: string
     companyUf: string
     companyCity: string
-    companyRoles: []
+    companyRoles: [],
+    companiesHistory: [],
     companyDescription: string
     companyEmail: string
     formatter: () => string
@@ -85,6 +101,7 @@ export default Vue.extend({
       companyCnpj: '',
       companyUf: 'SP',
       companyCity: 'Adamantina',
+      companiesHistory: ['Empresa 1', 'Empresa 2', 'Empresa 3'],
       companyRoles: [
         'shopping',
         'atendimento ao cliente',

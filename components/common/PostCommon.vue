@@ -1,35 +1,93 @@
 <template>
-  <b-card>
-    <p>
-      <strong v-if="reference === 1">Funcionário atual</strong>
+  <b-card v-if="id != undefined">
+    <b-row>
+      <b-col>
+        <p>
+          <strong v-if="reference === 1">Funcionário atual</strong>
 
-      <strong v-else-if="reference === 2">Ex-funcionário</strong>
-      <strong v-else>Não é mais funcionário</strong>
-    </p>
-    <p>
-      Relevância:
-      <span v-if="rate >= 70">Alta</span>
-      <span v-else-if="rate >= 40 && rate < 70">Média</span>
-      <span v-else-if="rate <= 40">Baixa</span>
-    </p>
+          <strong v-else-if="reference === 2">Ex-funcionário</strong>
+          <strong v-else>Não é mais funcionário</strong>
+          <b-icon-bar-chart-fill
+            :id="'popover-post-rate-target-' + id"
+            class="ml-2"
+            :variant="
+              rate >= 70
+                ? 'success'
+                : rate < 70 && rate >= 40
+                ? 'warning'
+                : 'danger'
+            "
+          />
+          <b-popover
+            :target="'popover-post-rate-target-' + id"
+            triggers="hover"
+            placement="top"
+          >
+            <template #title>Confiabilidade da informação</template>
+            <p>
+              <b-icon-bar-chart-fill variant="success" /> Avaliador confiável
+            </p>
+            <p>
+              <b-icon-bar-chart-fill variant="warning" /> Avaliador duvidoso
+            </p>
+            <p>
+              <b-icon-bar-chart-fill variant="danger" /> Avaliador não confiável
+            </p>
+          </b-popover>
+        </p>
+      </b-col>
+      <b-col>{{ date }}</b-col>
+    </b-row>
+
     <h4>{{ title }}</h4>
+    <h5>
+      <b-badge href="#" variant="secondary">Feeback</b-badge>
+      <b-badge href="#" variant="success">Elogio</b-badge>
+      <b-badge
+        href="#"
+        v-if="title == 'Estou preocupado com a falta de progresso de você.'"
+        variant="warning"
+        >Aviso</b-badge
+      >
+    </h5>
+
     <p>{{ content }}</p>
     <template #footer>
       <b-container>
         <b-row>
-          <b-col lg="2" md="12">
-            <b-btn :id="'popover-post-common' + id" variant="success"
-              ><b-icon-hand-thumbs-up /> Útil</b-btn
+          <b-col lg="3" md="12">
+            <b-input-group>
+              <b-input-group-append>
+                <b-button variant="success">
+                  <b-icon-arrow-bar-up></b-icon-arrow-bar-up>
+                </b-button>
+                <b-button :id="'popover-post-common' + id" variant="info">
+                  {{ (Math.random() * 100).toString().split('.')[0] }}
+                </b-button>
+                <b-button variant="danger">
+                  <b-icon-arrow-bar-down></b-icon-arrow-bar-down>
+                </b-button>
+              </b-input-group-append>
+            </b-input-group>
+            <!-- <b-btn
+              :id="'popover-post-common' + id"
+              size="lg"
+              variant="success"
+              class="d-flex"
             >
-
+              <b-icon-hand-thumbs-up class="mr-2" /> Útil</b-btn
+            > -->
             <b-popover
               :target="'popover-post-common' + id"
               triggers="hover"
-              placement="top"
+              placement="bottom"
             >
               <b-container>
                 <b-row>
                   <b-col>
+                    Numero de votantes no total
+                  </b-col>
+                  <!-- <b-col>
                     <post-common-surprise-reaction :id="id" />
                   </b-col>
                   <b-col>
@@ -37,7 +95,7 @@
                   </b-col>
                   <b-col>
                     <post-common-dislike-reaction :id="id" />
-                  </b-col>
+                  </b-col> -->
                 </b-row>
               </b-container>
             </b-popover>
@@ -66,6 +124,10 @@ export default Vue.extend({
     PostCommonDislikeReaction,
   },
   props: {
+    post: {
+      type: Object,
+      default: () => ({}),
+    },
     id: {
       type: String,
       default: Math.random(),

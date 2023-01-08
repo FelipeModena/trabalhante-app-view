@@ -36,7 +36,7 @@
     "sessionTime": 0
   },
   
-  {"userName":"Conta Empresarial","password":"UAyJ7HECj","isActive":true,"messages":[],"notifications":[],"id":"ac3f648d-0800-4d03-9c9a-15feb6e29601","email":"bputtnam0@deviantart.com","first_name":"Bendite","last_name":"Puttnam","avatar":"https://robohash.org/accusantiumeterror.png?size=50x50&set=set1","roles":["user", "admin", "company-owner"],"permissions": ["administrator", "manager"],"created_at":"06/26/2022","updated_at":"01/12/2022","deleted_at":"04/27/2022","sessionTime":null},
+  {"userName":"Jão Otávio","password":"UAyJ7HECj","isActive":true,"messages":[],"notifications":[],"id":"ac3f648d-0800-4d03-9c9a-15feb6e29601","email":"bputtnam0@deviantart.com","first_name":"Bendite","last_name":"Puttnam","avatar":"https://robohash.org/accusantiumeterror.png?size=50x50&set=set1","roles":["user", "admin", "company-owner"],"permissions": ["administrator", "manager"],"created_at":"06/26/2022","updated_at":"01/12/2022","deleted_at":"04/27/2022","sessionTime":null},
   {"userName":"Conta Colaborador","password":"2qmMEswvfUvT","isActive":false,"messages":[],"notifications":[],"id":"7d662b38-0253-4125-a338-2c2605a177b9","email":"cpanchen1@fotki.com","first_name":"Cristy","last_name":"Panchen","avatar":"https://robohash.org/ipsavitaefugiat.png?size=50x50&set=set1","roles":["user", "admin", "company-owner"],"permissions": ["administrator", "manager"],"created_at":"11/05/2022","updated_at":"08/30/2022","deleted_at":"09/05/2022","sessionTime":null},
   
   

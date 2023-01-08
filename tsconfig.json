@@ -17,7 +17,7 @@
       "@/*": ["./*"]
     },
     "forceConsistentCasingInFileNames": false,
-    "types": ["@nuxt/types", "@nuxtjs/axios", "@types/node"]
+    "types": ["@nuxt/types",  "@types/node","@nuxtjs/axios"]
   },
   "exclude": ["node_modules", ".nuxt", "dist"]
 }

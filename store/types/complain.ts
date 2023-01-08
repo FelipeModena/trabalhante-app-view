@@ -1,10 +1,12 @@
 export interface CategoryComplainState {
   id: string
   name: string
+  relevance: number
+  tags: string
 }
 export interface ComplainState {
   id?: string
-  companyId?: string
+  userId?: string
   title?: string
   userStatus?: number
   hashtags?: string[]

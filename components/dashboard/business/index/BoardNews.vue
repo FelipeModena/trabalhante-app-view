@@ -1,17 +1,33 @@
 <template>
   <div class="my-3">
-    <b-card title="Avaliações">
-      <PostCommon
-        v-for="complain in complains"
-        :id="complain.id"
-        :key="complain.id"
-        class="my-4"
-        :rate="complain.relevance"
-        :content="complain.description"
-        :title="complain.title"
-        :reference="complain.creatorReference"
-      />
+    <b-card v-if="complains.length" title="Avaliações ">
+      <b-container>
+        <b-row>
+          <b-col>
+            <PostCommon
+              v-for="index in postsToRender"
+              :id="complains[index].id"
+              :key="complains[index].id"
+              class="my-4"
+              :rate="complains[index].relevance"
+              :content="complains[index].description"
+              :title="complains[index].title"
+              :reference="complains[index].creatorReference"
+              :date="complains[index].createdAt"
+              :post="complains[index]"
+            />
+          </b-col>
+        </b-row>
+        <b-row class="text-center">
+          <b-col>
+            <b-button variant="primary" @click="postsToRender += 10"
+              >Mostrar mais</b-button
+            >
+          </b-col>
+        </b-row>
+      </b-container>
     </b-card>
+    <NoContent v-else />
   </div>
 </template>
 
@@ -22,14 +38,23 @@ import CompanyModule from '~/store/company'
 import { store } from '~/store/main'
 import PostCommon from '~/components/common/PostCommon.vue'
 import { ComplainState } from '~/store/types/complain'
-export default Vue.extend({
-  components: { PostCommon },
+import NoContent from '~/components/common/NoContent.vue'
 
+export default Vue.extend({
+  components: { PostCommon, NoContent },
+  data() {
+    return {
+      postsToRender: 10,
+    }
+  },
   computed: {
     complainModuleConnection: () => getModule(CompanyModule, store),
+    companyModuleConnection: () => getModule(CompanyModule, store),
     complains(): ComplainState[] {
-      const pagesOfComplains = this.complainModuleConnection.complains
-      return pagesOfComplains
+      if (this.companyModuleConnection.selectedCompany !== undefined) {
+        const pagesOfComplains = this.complainModuleConnection.complains
+        return pagesOfComplains
+      } else return []
     },
   },
   created() {

@@ -1,15 +1,16 @@
 <template>
   <section>
-    <b-container >
+    <b-container>
       <b-row class="text-center">
         <b-col>
           <h2>Venha fazer parte da nossa comunidade!</h2>
-          <p>
-            Se você é uma empresa que busca novos talentos, cadastre-se e comece
-            a divulgar suas vagas.
-          </p>
-          <nuxt-link to="/login/register"><b-button variant="primary" >Cadastrar</b-button></nuxt-link>
-          
+          <h3>
+            Impuslione sua carreira, valorize suas habilidades incetive tanto a
+            você quanto a sua empresa a crescerem juntos. Sua opiniao vale ouro!
+          </h3>
+          <nuxt-link to="/login/register"
+            ><b-button variant="primary">Cadastrar</b-button></nuxt-link
+          >
         </b-col>
       </b-row>
     </b-container>

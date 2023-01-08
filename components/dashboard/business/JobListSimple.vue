@@ -1,5 +1,5 @@
 <template>
-  <b-row>
+  <b-row v-if="companiesJobOpportunities">
     <b-col
       v-for="(jobOpportunity, index) in companiesJobOpportunities"
       :key="index"

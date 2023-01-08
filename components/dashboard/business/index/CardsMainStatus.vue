@@ -1,11 +1,11 @@
 <template>
-  <b-row class="text-center">
+  <b-row v-if="companiesJobOpportunities" class="text-center">
     <b-col lg="">
       <b-card title="Vagas ativas">
         <h4>
           {{
-            companiesJobOpportunities.length
-              ? companiesJobOpportunities.length
+            companiesJobOpportunities?.length
+              ? companiesJobOpportunities?.length
               : ''
           }}
         </h4>
@@ -38,7 +38,9 @@ export default Vue.extend({
   computed: {
     companyModuleConnection: () => getModule(CompanyModule, store),
     companiesJobOpportunities(): any {
-      return this.companyModuleConnection.selectedCompany.jobOpportunities
+      if (this.companyModuleConnection.selectedCompany) {
+        return this.companyModuleConnection.selectedCompany.jobOpportunities
+      } else return undefined
     },
     companies(): CompanyState {
       return this.companyModuleConnection.selectedCompany

@@ -1,5 +1,6 @@
 <template>
   <b-container fluid>
+    <b-row> </b-row>
     <BestCompanies />
   </b-container>
 </template>

@@ -87,7 +87,11 @@ export default Vue.extend({
   computed: {
     companyModuleConnection: () => getModule(CompanyModule, store),
     companiesPeriod(): PeriodCompanyEvaluationState[] {
-      return this.companyModuleConnection.selectedCompany.periods ?? []
+      if (this.companyModuleConnection.selectedCompany) {
+        
+        return this.companyModuleConnection.selectedCompany.periods ?? []
+      }
+      else return []
     },
   },
 })

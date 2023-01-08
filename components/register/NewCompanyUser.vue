@@ -12,6 +12,17 @@
           :formatter="formatter"
         ></b-form-input>
       </b-form-group>
+      <b-form-group
+        label="CNPJ"
+        label-for="register-company-name"
+      >
+        <b-form-input
+          id="register-company-name"
+          v-model="companyName"
+          type="text"
+          :formatter="formatter"
+        ></b-form-input>
+      </b-form-group>
       <b-form-group label="Estado" label-for="register-uf">
         <b-form-select
           id="register-uf"
@@ -146,7 +157,7 @@ export default Vue.extend({
             uf: this.companyUf,
           },
           roles: this.companyRoles,
-          companyStatus: {},
+            companyStatus:  {},
         })
       if (companyStoreStatus !== 1) {
         this.$router.push({path:'/dashboard',query: { id: this.userId },})

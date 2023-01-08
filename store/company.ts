@@ -4,6 +4,7 @@ import { ComplainState } from './types/complain'
 import CompanyMock from './mocks/company/company.mock.json'
 import ComplainMock from './mocks/company/complain.mock.json'
 import JobsMock from './mocks/jobs/jobs.mock.json'
+import { requester } from './axios/mains.axios'
 
 const userIDMock = 'ac3f648d-0800-4d03-9c9a-15feb6e29601'
 
@@ -40,8 +41,11 @@ export default class CompanyModule extends VuexModule {
           companyName: company.companyName || '',
           companyStatus: { mensalSearches: 0, newReviews: 0 },
           id: company.id || '',
+          attributes: company.attributes || ([] as any),
           periods: company.periods || ([] as any),
           userId: company.userId || '',
+          createdAt: company.createdAt || '',
+          updatedAt: company.updatedAt || '',
           jobOpportunities: JobsMock.filter(
             (jobMock) => jobMock.companyId === company.id
           ) as any,
@@ -198,5 +202,13 @@ export default class CompanyModule extends VuexModule {
 
     localStorage.setItem('selectedCompany', companies[0].id)
     localStorage.setItem('companyLocal', JSON.stringify(companies))
+  }
+
+  async algo() {
+    try {
+      console.log(await requester)
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
